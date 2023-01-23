@@ -6,5 +6,9 @@ def bos_page():
     return f"{_url}/newbos.php"
 
 
+def transcript(student_number):
+    return f"{_url}/Officialreport.php?showmaster=1&StudentID={student_number}"
+
+
 def get_full_url(link: str):
     return _url + link

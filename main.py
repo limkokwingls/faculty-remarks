@@ -4,6 +4,7 @@ from browser import Browser
 from rich.prompt import Confirm
 from rich.console import Console
 from rich.prompt import Prompt
+from rich import print
 
 from credentials import read_credentials, write_credentials
 
@@ -44,11 +45,14 @@ def main():
     while not browser.logged_in:
         try_function(login)
 
-    programs = browser.get_programs()
+    # programs = browser.get_programs()
 
-    program, _ = pick(programs, "Pick Program", indicator='->')
-    program = program.split()[0]  # type: ignore
-    print(program)
+    # program, _ = pick(programs, "Pick Program", indicator='->')
+    # program = program.split()[0]  # type: ignore
+    # print(program)
+
+    results = browser.read_transcript("901000010", 1)
+    print(results)
 
 
 def try_function(func, *args):

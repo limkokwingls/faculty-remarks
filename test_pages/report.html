@@ -1,0 +1,1829 @@
+
+<!-- saved from url=(0100)https://cmslesotho.limkokwing.net/campus/faculty/Officialreport.php?showmaster=1&StudentID=901000010 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+
+FACULTY MANAGEMENT SYSTEM 0.9</title>
+<link href="./report_files/faculty_09.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+A.sub { text-decoration:none; font-family:Verdana,Arial,sans-serif; font-style:normal; font-size:10px; color:rgb(255,255,255); font-weight:normal;}
+}
+-->
+</style>
+<meta name="generator" content="PHPMaker v4.3.0.0">
+</head>
+<body data-new-gr-c-s-check-loaded="14.1094.0" data-gr-ext-installed="">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="10">
+<tbody><tr>
+	<td colspan="2" bgcolor="#000000" height="50"><span class="phpmaker"><b>
+	<font size="4" color="#FFFFFF">FACULTY MANAGEMENT SYSTEM 0.9A<span style="color:#0000FF">
+	<font size="4" color="#FFFFFF"><b> - [LSO-MSU]</b><span style="color:#0000FF">
+	</span></font></span></font></b></span><font size="4" color="#FFFFFF"><br>
+<div style="font-size:medium; color:#FF0000; font-weight:bold;">
+<a href="http://server.intranet/campus/notice/s_noticeboardlist.php"><div style="font-size:medium; color:#FF0000; font-weight:bold;">Results Entries Locking Notice</div></a>
+ <!-- <blink>Urgent: Background update at 4.30PM. Registry and Lecturer Portal will not be accessible.</blink> -->
+<!-- <blink>System will be not accessible from 12pm for maintenance.</blink> -->
+</div></font></td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#333333" height="25">
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/">Home</a>&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/notice/">Bulletin</a>&nbsp;&nbsp;
+  <font color="#FFFFFF" size="2">&nbsp;»</font> 	
+	&nbsp; <a class="sub" href="https://cmslesotho.limkokwing.net/campus/faculty/">Faculty</a>&nbsp;&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/lecturer/">Lecturer</a>&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/registry/">Registry</a>&nbsp;&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/bursary/">Bursary</a>&nbsp;	
+	<!--&nbsp;&nbsp;<a class="sub" href="/campus/cdu/">AIM</a>&nbsp;-->
+  <font color="#FFFFFF" size="2">&nbsp;»</font>&nbsp; 	
+  &nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/services/">Services</a>&nbsp;&nbsp;
+  &nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/marketing/">Marketing</a>&nbsp;&nbsp;
+   &nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/cdu/">AQA</a>&nbsp;&nbsp;
+    &nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/accommodation/">Accommodation</a>&nbsp;&nbsp;
+  <!--&nbsp;<a class="sub" href="/campus/management/">Enquiry</a>&nbsp;&nbsp;-->
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/reporting/">Reporting</a>&nbsp;&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/support/">Support</a>&nbsp;&nbsp;
+ 	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/setup/">Setup</a>&nbsp;
+	<!--<font color="#FFFFFF" size="2">&nbsp;&raquo;</font>&nbsp; 	
+  &nbsp;<a class="sub" target="_blank" href="/campus/portalbasic/">Portal</a>&nbsp;&nbsp;  
+  &nbsp;&nbsp;<a class="sub" target="_blank" href="/campus/portaleditor/">Editor</a>&nbsp;&nbsp;
+  &nbsp;&nbsp;<a class="sub" href="/campus/portalfaculty/">Upload</a>&nbsp;&nbsp;	-->
+ 	<font color="#FFFFFF" size="2">»</font>&nbsp; 	
+	&nbsp;&nbsp;<a class="sub" href="http://server.intranet/">LUCT</a>&nbsp;
+	&nbsp;&nbsp;<a class="sub" href="https://cmslesotho.limkokwing.net/campus/ih/">LEC</a>&nbsp;
+	<font color="#FFFFFF" size="2">»</font>&nbsp; &nbsp;	
+	<a class="sub" href="https://cmslesotho.limkokwing.net/campus/help/">Help</a>&nbsp;&nbsp;	
+	<font color="#FFFFFF" size="2">»</font>&nbsp; 	
+	&nbsp;	<a class="sub" href="https://cmslesotho.limkokwing.net/campus/faculty/logout.php">Logout</a>&nbsp;&nbsp;	
+	</td>
+</tr>
+<tr>
+	<!-- left column -->
+	<td nowrap="" width="100" height="100%" valign="top" bgcolor="#F5F5F5">
+		<table width="90" border="0" cellspacing="0" cellpadding="2">
+				<tbody><tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/r_studentlist.php?cmd=resetall">Students</a></span></td>
+		</tr>
+						<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/userlevelslist.php?cmd=resetall">[Security]</a></span></td>
+		</tr>
+				
+				<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/f_lecturerlist.php?cmd=resetall">Lecturer</a></span></td>
+		</tr>
+				
+				<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/f_schoollist.php?cmd=resetall">School</a></span></td>
+		</tr>
+				
+				<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/f_modulelist.php?cmd=resetall">Modules</a></span></td>
+		</tr>
+						<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/f_finalexamtimetablelist.php?cmd=resetall">Final Exam Timetable</a></span></td>
+		</tr>
+				
+				<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/f_classviewlist.php?cmd=resetall">Classes</a></span></td>
+		</tr>
+						<tr>
+			<td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/r_studentfullviewlist.php?cmd=resetall">Student Info [REG]</a></span></td>
+		</tr>
+						<tr>
+			<td><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/changepwd.php">Change Password</a></span></td>
+		</tr>
+				<tr><td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/facultyreport.php">Faculty Report</a></span></td></tr>
+				<tr><td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/newbos.php">Board Report</a></span></td></tr>
+				<tr><td nowrap=""><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/senatereport.php">Senate Report</a></span></td></tr>
+						<tr>
+			<td><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/logout.php">[ Logout ]</a></span></td>
+		</tr>
+				</tbody></table>	</td>
+	<!-- right column -->
+	<td width="90%" valign="top">
+<p><span class="phpmaker"><a href="https://cmslesotho.limkokwing.net/campus/faculty/r_studentlist.php">[Back]</a></span></p>
+<p><span class="phpmaker">: [UnofficialTranscript]
+</span></p>
+<form method="post">
+<table class="ewReportTable" cellspacing="-1">
+	<tbody><tr><td class="ewGroupField"><span class="phpmaker">Student:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+901000010 Thabo Pharoe</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Program:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+BSC (HONS) IN INFORMATION TECHNOLOGY</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2008-08</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+-F1, Foundation Semester 1</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:3.22 / CGPA:3.22</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMM101</span></td>
+		<td><span class="phpmaker">
+Presentation Research Study Skills</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMM102</span></td>
+		<td><span class="phpmaker">
+Professional Communication Skills 1</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMM106</span></td>
+		<td><span class="phpmaker">
+Human Communication</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP101</span></td>
+		<td><span class="phpmaker">
+Introduction to Computer Skills</span></td>
+		<td><span class="phpmaker">
+<b>A-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">4.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">12.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+CRET101</span></td>
+		<td><span class="phpmaker">
+Creative and Innovation Studies</span></td>
+		<td><span class="phpmaker">
+<b>A-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">4.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">12.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+MGMT101</span></td>
+		<td><span class="phpmaker">
+Introduction to Business Management</span></td>
+		<td><span class="phpmaker">
+<b>B</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.99</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2008-08 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">58.02</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2009-01</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+-F2, Foundation Semester 2</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.39 / CGPA:2.81</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMM103</span></td>
+		<td><span class="phpmaker">
+Professional Communication Skills 2</span></td>
+		<td><span class="phpmaker">
+<b>B+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">11.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP102</span></td>
+		<td><span class="phpmaker">
+Introduction to Database</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP103</span></td>
+		<td><span class="phpmaker">
+Fundamental of Internet Technologies</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP107</span></td>
+		<td><span class="phpmaker">
+Introduction to Computer Architecture</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+MATH101</span></td>
+		<td><span class="phpmaker">
+Computerized Mathematics I</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+PROG101</span></td>
+		<td><span class="phpmaker">
+Principles of Programming Logic &amp; Design</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2009-01 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">43.02</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2009-07</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+01, Year 1 Sem 1</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.60 / CGPA:2.60</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP103</span></td>
+		<td><span class="phpmaker">
+Fundamental of Internet Technologies</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMATH104</span></td>
+		<td><span class="phpmaker">
+Mathematics for Computing </span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMULT119</span></td>
+		<td><span class="phpmaker">
+Multimedia Technology</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROG101</span></td>
+		<td><span class="phpmaker">
+C++ Programming 1</span></td>
+		<td><span class="phpmaker">
+<b>B</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROG107</span></td>
+		<td><span class="phpmaker">
+Web Design </span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DTECH102</span></td>
+		<td><span class="phpmaker">
+Fundamental of Computer Systems</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2009-07 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">15.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">15.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">38.97</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2010-02</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+02, Year 1 Sem 2</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.45 / CGPA:2.52</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DCOMP114</span></td>
+		<td><span class="phpmaker">
+Database System</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DCOMP132</span></td>
+		<td><span class="phpmaker">
+Object Oriented Techniques</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMATH105</span></td>
+		<td><span class="phpmaker">
+Probability &amp; Statistics</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMULT120</span></td>
+		<td><span class="phpmaker">
+Multimedia Authoring</span></td>
+		<td><span class="phpmaker">
+<b>B+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">11.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROG102</span></td>
+		<td><span class="phpmaker">
+JAVA Programming 1</span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DTECH103</span></td>
+		<td><span class="phpmaker">
+Introduction to Information Systems</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2010-02 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">44.04</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2010-07</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+03, Year 2 Sem 1</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:1.78 / CGPA:2.26</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BFR 2543</span></td>
+		<td><span class="phpmaker">
+Management Information Systems</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIE2153</span></td>
+		<td><span class="phpmaker">
+Discrete Mathematics</span></td>
+		<td><span class="phpmaker">
+<b>F</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIE2223</span></td>
+		<td><span class="phpmaker">
+Advanced Java Programming 2</span></td>
+		<td><span class="phpmaker">
+<b>PC</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BTECH2309</span></td>
+		<td><span class="phpmaker">
+E-Commerce Theories &amp; Practices</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+COMP219</span></td>
+		<td><span class="phpmaker">
+Computer Systems Support</span></td>
+		<td><span class="phpmaker">
+<b>B-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROG103</span></td>
+		<td><span class="phpmaker">
+C++ Programming 2</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2010-07 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">15.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">32.01</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2011-02</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+04, Year 2 Sem 2</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.50 / CGPA:2.32</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIE2243</span></td>
+		<td><span class="phpmaker">
+Human Computer Interaction</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DCOMP218</span></td>
+		<td><span class="phpmaker">
+Data Communications &amp; Networking </span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DCOMP219</span></td>
+		<td><span class="phpmaker">
+System Development Methods &amp; Tools</span></td>
+		<td><span class="phpmaker">
+<b>B-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DLAW206</span></td>
+		<td><span class="phpmaker">
+Information Technology Law</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMULT221</span></td>
+		<td><span class="phpmaker">
+Interactive Multimedia</span></td>
+		<td><span class="phpmaker">
+<b>B+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">11.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROG205</span></td>
+		<td><span class="phpmaker">
+Web Programming with JAVA</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2011-02 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">18.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">45.00</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2011-07</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+05, Year 3 Sem 1</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.37 / CGPA:2.33</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIE2433</span></td>
+		<td><span class="phpmaker">
+Software Design</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3263</span></td>
+		<td><span class="phpmaker">
+Distributed Systems</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DCOMP320</span></td>
+		<td><span class="phpmaker">
+Data Structures &amp; Algorithm Analysis</span></td>
+		<td><span class="phpmaker">
+<b>F</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMGMT315</span></td>
+		<td><span class="phpmaker">
+Software Project Management </span></td>
+		<td><span class="phpmaker">
+<b>B+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">11.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DMGMT316</span></td>
+		<td><span class="phpmaker">
+Ethics &amp; Professional Conduct </span></td>
+		<td><span class="phpmaker">
+<b>B</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.99</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+DPROJ302</span></td>
+		<td><span class="phpmaker">
+Major Project 1</span></td>
+		<td><span class="phpmaker">
+<b>B+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">7.34</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2011-07 (6 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">17.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">14.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">40.34</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2012-04</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+06, Year 3 Sem 2</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:1.80 / CGPA:2.25</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BBB3163</span></td>
+		<td><span class="phpmaker">
+Knowledge Management </span></td>
+		<td><span class="phpmaker">
+<b>C+</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">8.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIE3274</span></td>
+		<td><span class="phpmaker">
+Major Project 2</span></td>
+		<td><span class="phpmaker">
+<b>B-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">9.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3143</span></td>
+		<td><span class="phpmaker">
+Operating System</span></td>
+		<td><span class="phpmaker">
+<b>F</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">0.00</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3273</span></td>
+		<td><span class="phpmaker">
+Computer Network</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3283</span></td>
+		<td><span class="phpmaker">
+Artificial Intelligence</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2012-04 (5 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">15.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">12.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">27.03</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2012-09</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+05, Year 3 Sem 1</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:1.84 / CGPA:2.29</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT2123</span></td>
+		<td><span class="phpmaker">
+Discrete Mathematics</span></td>
+		<td><span class="phpmaker">
+<b>PX</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">1.67</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">5.01</div>
+</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3253</span></td>
+		<td><span class="phpmaker">
+Data Structures &amp; Algorithms Analysis</span></td>
+		<td><span class="phpmaker">
+<b>C-</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.00</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2012-09 (2 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">6.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">6.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">11.01</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Term:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+2013-03</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Semester:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+06, Year 3 Sem 2</span></td></tr>
+	<tr><td class="ewGroupField"><span class="phpmaker">Results:</span></td>
+	<td colspan="8" class="ewGroupName"><span class="phpmaker">
+GPA:2.33 / CGPA:2.36</span></td></tr>
+	<tr>
+		<td></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Code</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">ModuleName</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Grade</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Credits</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Attempt</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Earned</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Point</span></td>
+		<td valign="top" class="ewGroupHeader"><span class="phpmaker">Total</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="phpmaker">
+BIT3143</span></td>
+		<td><span class="phpmaker">
+Operating System</span></td>
+		<td><span class="phpmaker">
+<b>C</b>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.00</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">2.33</div>
+</span></td>
+		<td><span class="phpmaker">
+<div align="right">6.99</div>
+</span></td>
+	</tr>
+	
+	
+	
+<!--  Term:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+2013-03 (1 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">3.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">6.99</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	
+<!--  Program:: -->
+	<tr><td colspan="9" class="ewGroupSummary"><span class="phpmaker"> 	<!--
+BSC (HONS) IN INFORMATION TECHNOLOGY (50 Detail Records)</span></td></tr>
+	-->
+	</span></td></tr><tr>
+		<td class="ewGroupAggregate"><span class="phpmaker">Total:</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">146.0</div>
+</span></td>
+		<td><span class="phpmaker"><div align="right">137.0</div>
+</span></td>
+		<td><span class="phpmaker">&nbsp;</span></td>
+		<td><span class="phpmaker"><div align="right">346.43</div>
+</span></td>
+	</tr>
+	<tr><td colspan="13"><span class="phpmaker">&nbsp;<br></span></td></tr>
+	
+	<tr><td colspan="8"><span class="phpmaker">&nbsp;
+	  <br></span></td>
+	</tr>
+</tbody></table>
+</form>
+				<p>&nbsp;</p>	</td>
+</tr>
+<tr>
+  <td height="10" valign="top" bgcolor="#F5F5F5">&nbsp;</td>
+  <td height="10" valign="top"><font color="#C6C6C6"><span class="style1">
+  © Limkokwing University of Creative Technology 2007 - 2009
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Login:matsoso.monaheng/Faculty - Supervisor]   
+  </span> 
+	</font> </td>
+</tr>
+</tbody></table>
+		
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
