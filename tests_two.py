@@ -14,75 +14,58 @@ from rich import print
 PARSER = "html5lib"
 
 
-def get_marks_cols(workbook: Workbook):
+def get_marks_cols(sheet: Worksheet):
     courses = {}
-    for ws in workbook:
-        sheet: Worksheet = ws
-        for col in sheet.iter_cols():
-            for c in col:
-                cell: Cell = c
-                if cell.value == 'Mk':
-                    col_i = cell.col_idx
-                    row_i = cell.row
-                    grade_cell: Cell = sheet.cell(row_i-2, col_i)
-                    # courses[grade_cell.value] = grade_cell.column
-                    courses[grade_cell.column] = grade_cell.value
+    for col in sheet.iter_cols():
+        for c in col:
+            cell: Cell = c
+            if cell.value == 'Mk':
+                col_i = cell.col_idx
+                row_i = cell.row
+                grade_cell: Cell = sheet.cell(row_i-2, col_i)
+                # courses[grade_cell.value] = grade_cell.column
+                courses[grade_cell.column] = grade_cell.value
     return courses
 
 
-def get_std_column(workbook: Workbook):
-    for ws in workbook:
-        sheet: Worksheet = ws
-        for col in sheet.iter_cols():
-            for c in col:
-                cell: Cell = c
-                if cell.value == 'StudentID':
-                    return cell.column
+def get_std_column(sheet: Worksheet):
+    for col in sheet.iter_cols():
+        for c in col:
+            cell: Cell = c
+            if cell.value == 'StudentID':
+                return cell.column
     return 3
 
 
-def get_remark_col(workbook: Workbook):
-    for ws in workbook:
-        sheet: Worksheet = ws
-        for col in sheet.iter_cols():
-            for c in col:
-                cell: Cell = c
-                if 'remark' in cell.value.lower():
-                    return cell.column
+def get_remark_col(sheet: Worksheet):
+    for col in sheet.iter_cols():
+        for c in col:
+            cell: Cell = c
+            if cell and cell.value and 'remark' in str(cell.value).lower():
+                return cell.column
     return -1
 
 
-def get_student_numbers(workbook: Workbook) -> dict[int, str]:
+def get_student_numbers(sheet: Worksheet) -> dict[int, str]:
     data = {}
-    std_col = get_std_column(workbook)
-    for ws in workbook:
-        sheet: Worksheet = ws
-        for col in sheet.iter_cols():
-            for c in col:
-                cell: Cell = c
-                if cell.column == std_col:
-                    if is_number(cell.value):
-                        data[cell.row] = cell.value
+    std_col = get_std_column(sheet)
 
+    for col in sheet.iter_cols():
+        for c in col:
+            cell: Cell = c
+            if cell.column == std_col:
+                if is_number(cell.value):
+                    data[cell.row] = cell.value
     return data
 
 
-def main():
-
-    workbook: Workbook = openpyxl.load_workbook("Results 2022-08.xlsx")
-
-    marks = get_marks_cols(workbook)
-    students = get_student_numbers(workbook)
-
-    sheet: Worksheet = workbook.active
+def get_remarks(sheet: Worksheet):
+    marks = get_marks_cols(sheet)
+    students = get_student_numbers(sheet)
 
     data = {}
-
-    a = []
-
     for student_col in students:
         student_number = students[student_col]
-        a.append(student_number)
         repeat = []
         sup = []
         for mark_col in marks:
@@ -103,16 +86,25 @@ def main():
             remarks = f"{remarks}, Repeat " + ", ".join(repeat)
 
         data[student_col] = remarks
+    return data
 
-    print(a)
 
-    # for ws in workbook:
-    #     sheet: Worksheet = ws
-    #     for i, row in enumerate(sheet.rows):
-    #         cell = row[std_col-1]
-    #         print(cell.value)
+def main():
+    file_path = "Results 2022-08.xlsx"
+    workbook: Workbook = openpyxl.load_workbook(file_path)
 
-    # print(std_col)
+    sheet: Worksheet = workbook.active
+
+    for ws in workbook:
+        sheet: Worksheet = ws
+        remarks = get_remarks(sheet)
+        remarks_col = get_remark_col(sheet)
+        for it in remarks:
+            print(f"row={it}, col={remarks_col}")
+            cell: Cell = sheet.cell(row=it, column=remarks_col)
+            cell.value = remarks[it]
+
+    workbook.save(file_path)
 
 
 if __name__ == '__main__':
