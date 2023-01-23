@@ -90,21 +90,7 @@ def get_remarks(sheet: Worksheet):
 
 
 def main():
-    file_path = "Results 2022-08.xlsx"
-    workbook: Workbook = openpyxl.load_workbook(file_path)
-
-    sheet: Worksheet = workbook.active
-
-    for ws in workbook:
-        sheet: Worksheet = ws
-        remarks = get_remarks(sheet)
-        remarks_col = get_remark_col(sheet)
-        for it in remarks:
-            print(f"row={it}, col={remarks_col}")
-            cell: Cell = sheet.cell(row=it, column=remarks_col)
-            cell.value = remarks[it]
-
-    workbook.save(file_path)
+    pass
 
 
 if __name__ == '__main__':

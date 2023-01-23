@@ -1,5 +1,6 @@
 import asyncio
 from unittest import result
+import openpyxl
 from rich.prompt import Prompt
 from pick import pick
 from browser import Browser
@@ -9,9 +10,15 @@ from rich.prompt import Prompt
 from rich import print
 from datetime import datetime
 from rich.progress import track
+from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
+from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.workbook.workbook import Workbook
+from openpyxl.cell.cell import Cell
+from openpyxl.utils.dataframe import dataframe_to_rows
 
 
 from credentials import read_credentials, write_credentials
+from workbook_reader import get_remark_col, get_remarks, get_student_numbers
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")
@@ -44,46 +51,42 @@ async def login():
         logged_in = input_username_and_password()
 
 
-student_numbers = [
-    901016893,
-    901000052,
-    901000098,
-    901000120,
-    901000166,
-    901000167,
-]
+async def get_results(worksheet: Worksheet):
+
+    label = worksheet.title
+    student_numbers = get_student_numbers(worksheet)
+
+    results = []
+    with console.status(f"Reading {label} transcripts"):
+        tasks = []
+        for it in student_numbers:
+            tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
+    for it in track(asyncio.as_completed(tasks), total=len(tasks), description=f"Downloading {label} transcripts"):
+        results.append(await it)
+    return results
 
 
 async def main():
     while not browser.logged_in:
         await login()
 
-    # programs = browser.get_programs()
+    file_path = "Results 2022-08.xlsx"
+    workbook: Workbook = openpyxl.load_workbook(file_path)
 
-    # program, _ = pick(programs, "Pick Program", indicator='->')
-    # program = program.split()[0]  # type: ignore
-    # print(program)
+    sheet: Worksheet = workbook.active
 
-    # results = []
-    # startTime = datetime.now()
-    # for i, it in enumerate(student_numbers):
-    #     res = browser.read_transcript(
-    #         it, 1, progress=f"{i}/{len(student_numbers)}")
-    #     results.append(res)
-    # print(results)
-    # print(datetime.now() - startTime)
+    for ws in workbook:
+        sheet: Worksheet = ws
+        results = await get_results(sheet)
+        print(results)
+        # remarks = get_remarks(sheet)
+        # remarks_col = get_remark_col(sheet)
+        # for it in remarks:
+        #     print(f"row={it}, col={remarks_col}")
+        #     cell: Cell = sheet.cell(row=it, column=remarks_col)
+        #     cell.value = remarks[it]
 
-    results = []
-
-    with console.status("Reading transcripts"):
-        tasks = []
-        for it in student_numbers:
-            tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
-    for it in track(asyncio.as_completed(tasks), total=len(tasks), description="Downloading transcripts"):
-        results.append(await it)
-
-    print(results)
-    print(len(results))
+    workbook.save(file_path)
 
 if __name__ == '__main__':
     # while True:
