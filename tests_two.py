@@ -78,8 +78,11 @@ def main():
 
     data = {}
 
+    a = []
+
     for student_col in students:
         student_number = students[student_col]
+        a.append(student_number)
         repeat = []
         sup = []
         for mark_col in marks:
@@ -99,9 +102,9 @@ def main():
         if len(repeat) > 0:
             remarks = f"{remarks}, Repeat " + ", ".join(repeat)
 
-        data[student_number] = remarks
+        data[student_col] = remarks
 
-    print(data)
+    print(a)
 
     # for ws in workbook:
     #     sheet: Worksheet = ws

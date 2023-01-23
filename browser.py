@@ -38,8 +38,8 @@ class Browser:
                     self.logged_in = True
                     return True
 
-    def read_transcript(self, student_number: str, semester: int):
-        with console.status(f"Reading transcript for {student_number}"):
+    def read_transcript(self, student_number: int, semester: int, progress="1/1"):
+        with console.status(f"{progress}) Reading transcript for {student_number}"):
             response = self.session.get(urls.transcript(student_number))
             page = BeautifulSoup(response.text, PARSER)
             table = page.select_one("table.ewReportTable")

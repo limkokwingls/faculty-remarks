@@ -5,6 +5,8 @@ from rich.prompt import Confirm
 from rich.console import Console
 from rich.prompt import Prompt
 from rich import print
+from datetime import datetime
+
 
 from credentials import read_credentials, write_credentials
 
@@ -41,6 +43,33 @@ def login():
     console.print("Login Successful", style="green")
 
 
+student_numbers = [
+    901016893,
+    901016998,
+    901017006,
+    901016779,
+    901016760,
+    901016873,
+    901017036,
+    901016901,
+    901017001,
+    901016837,
+    901012149,
+    901016996,
+    901016780,
+    901016994,
+    901016813,
+    901017000,
+    901016995,
+    901016869,
+    901016943,
+    901015694,
+    901016806,
+    901017016,
+    901016647
+]
+
+
 def main():
     while not browser.logged_in:
         try_function(login)
@@ -51,8 +80,14 @@ def main():
     # program = program.split()[0]  # type: ignore
     # print(program)
 
-    results = browser.read_transcript("901000010", 1)
+    results = []
+    startTime = datetime.now()
+    for i, it in enumerate(student_numbers):
+        res = browser.read_transcript(
+            it, 1, progress=f"{i}/{len(student_numbers)}")
+        results.append(res)
     print(results)
+    print(datetime.now() - startTime)
 
 
 def try_function(func, *args):
