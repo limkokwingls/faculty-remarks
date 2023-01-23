@@ -1,3 +1,4 @@
+from turtle import title
 import openpyxl
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup
@@ -21,17 +22,31 @@ def main():
         workbook = Workbook()
         sheet: Worksheet = workbook.active
 
+        title_printed = False
         for row_i, row in enumerate(table):
+            if title_printed:
+                row_i += 3
             for col_i, col in enumerate(row):
-                if row_i >= 4:
-                    break
                 if row_i == 3 and col_i == 1:
-                    text = col.get_text(separator='\n', strip=True)
-                    print(text.split("\n"))
-                val = col.get_text(strip=True)
-                sheet.cell(row=row_i+1, column=col_i+1).value = val
+                    title = col.get_text(separator='\n', strip=True)
+                    title_lines = title.split("\n")
+                    for i, line in enumerate(title_lines):
+                        sheet.cell(i+1, 1).value = line
+                    title_printed = True
+                else:
+                    val = col.get_text(strip=True)
+                    cell = sheet.cell(row=row_i+1, column=col_i+1)
+                    # add_border(cell)
+                    cell.value = val
 
         workbook.save("data.xlsx")
+
+
+def add_border(cell: Cell):
+    cell.border = Border(left=Side(style='thin'),
+                         right=Side(style='thin'),
+                         top=Side(style='thin'),
+                         bottom=Side(style='thin'))
 
 
 if __name__ == '__main__':

@@ -80,13 +80,24 @@ def main():
 
     for student_col in students:
         student_number = students[student_col]
-        remarks = ["Proceed"]
+        repeat = []
+        sup = []
         for mark_col in marks:
             mark_value = sheet.cell(student_col, mark_col).value
             if is_number(mark_value):
                 mark_value = int(mark_value)
                 if mark_value >= 45 and mark_value < 50:
-                    remarks.append(f"Sup {marks[mark_col]}")
+                    sup.append(marks[mark_col])
+                elif mark_value < 45:
+                    repeat.append(marks[mark_col])
+        remarks = "Proceed"
+        if len(repeat) >= 3:
+            remarks = "Remain in Semester"
+
+        if len(sup) > 0:
+            remarks = f"{remarks}, Sup " + ", ".join(sup)
+        if len(repeat) > 0:
+            remarks = f"{remarks}, Repeat " + ", ".join(repeat)
 
         data[student_number] = remarks
 
