@@ -1,52 +1,54 @@
 from rich.prompt import Prompt
 from pick import pick
-from pip import main
 from browser import Browser
 from rich.prompt import Confirm
 from rich.console import Console
 from rich.prompt import Prompt
 
-from term import get_term
+from credentials import read_credentials, write_credentials
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")
 browser = Browser()
-faculty = None
+
+
+def input_username_and_password():
+    username = Prompt.ask("Username")
+    password = Prompt.ask("Password", password=True)
+    display_name = browser.login(username, password)
+    if not display_name:
+        error_console.print("Invalid Credentials")
+    else:
+        write_credentials(username, password)
+        print()
+    return display_name
 
 
 def login():
-    username = Prompt.ask("Username")
-    password = Prompt.ask("Password", password=True)
-    with open('credentials', 'r') as f:
-        credentials = f.read().splitlines()
+    username, password, logged_in = None, None, False
+    credentials = read_credentials()
     if credentials:
-        username = credentials[0]
-        password = credentials[1]
+        username, password = credentials
+        logged_in = browser.login(username, password)
+    else:
+        print("Enter CMS credentials")
+        logged_in = input_username_and_password()
 
-    browser.login(username, password)
+    while not logged_in:
+        logged_in = input_username_and_password()
+
+    console.print("Login Successful", style="green")
 
 
 def main():
     while not browser.logged_in:
         try_function(login)
 
-    global faculty
-    if not faculty:
-        faculty_list = browser.get_faculties()
-        faculty, _ = pick(faculty_list, "Pick Faculty", indicator='->')
-    print(faculty)
+    programs = browser.get_programs()
 
-    programs = browser.get_programs(faculty)
     program, _ = pick(programs, "Pick Program", indicator='->')
-    print("Program", program)
-
-    sem: str = Prompt.ask("Semester", choices=[
-                          '1', '2', '3', '4', '5', '6', '7', '8'])
-    term = Prompt.ask("Term", default=get_term())
-    students = browser.program_students(faculty, program, f"0{sem}", term)
-    for i, std in enumerate(students):
-        browser.print_transcript(std[3])
-        print(f"{i+1}/{len(students)}) {std[3]} - {std[4]}, Done")
+    program = program.split()[0]  # type: ignore
+    print(program)
 
 
 def try_function(func, *args):
@@ -63,6 +65,5 @@ def try_function(func, *args):
 
 
 if __name__ == '__main__':
-    while True:
-        with console.screen():
-            main()
+    # while True:
+    main()
