@@ -2,7 +2,6 @@ from turtle import title
 import openpyxl
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup
-import pandas as pd
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook

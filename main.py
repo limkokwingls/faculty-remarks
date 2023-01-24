@@ -1,27 +1,20 @@
 import asyncio
 from pathlib import Path
-from unittest import result
 import openpyxl
 from rich.prompt import Prompt
 from pick import pick
 from browser import Browser
-from rich.prompt import Confirm
 from rich.console import Console
 from rich.prompt import Prompt
 from rich import print
-from datetime import datetime
-from rich.progress import track
-from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
-from openpyxl.utils.dataframe import dataframe_to_rows
-from tqdm import tqdm
 
 from credentials import read_credentials, write_credentials
 from model import BorderlineObject
 from utils import convert_list_to_dict
-from workbook_reader import get_border_line_objects, get_remark_col, generate_remarks, get_student_numbers, read_excel_marks
+from workbook_reader import get_border_line_objects, get_remark_col, generate_remarks, get_student_numbers
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")

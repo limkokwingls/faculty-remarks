@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-from html_utils import find_link_in_table, read_table
-import requests
-from model import Result
+from html_utils import read_table
 from session import Session
 import urls
 from rich.console import Console
