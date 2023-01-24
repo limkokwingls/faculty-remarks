@@ -109,18 +109,18 @@ def print_borderlines(workbook: Workbook):
 
 
 async def main():
-    # while not browser.logged_in:
-    #     await login()
+    while not browser.logged_in:
+        await login()
 
     file = open_file()
     with console.status(f"Loading file..."):
         workbook: Workbook = openpyxl.load_workbook(file)
 
-    # _, option = pick(["Add Remarks", "Check Borderlines"])
-    # if option == 0:
-    #     await add_remarks(workbook, file)
-    # elif option == 1:
-    print(print_borderlines(workbook))
+    _, option = pick(["Add Remarks", "Check Borderlines"])
+    if option == 0:
+        await add_remarks(workbook, file)
+    elif option == 1:
+        print(print_borderlines(workbook))
 
     print("[bold blue]Done!")
 
