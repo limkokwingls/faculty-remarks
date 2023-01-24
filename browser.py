@@ -63,7 +63,7 @@ class Browser:
         results = []
         for it in data:
             try:
-                result = {it[0]: float(it[-2])}
+                result = {it[0]: float(it[-3])}
                 results.append(result)
             except:
                 print("Error results: ", it)

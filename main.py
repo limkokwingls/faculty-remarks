@@ -19,7 +19,8 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 from tqdm import tqdm
 
 from credentials import read_credentials, write_credentials
-from workbook_reader import get_remark_col, get_remarks, get_student_numbers, read_student_marks
+from utils import convert_list_to_dict
+from workbook_reader import get_remark_col, generate_remarks, get_student_numbers, read_excel_marks
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")
@@ -52,7 +53,7 @@ async def login():
         logged_in = input_username_and_password()
 
 
-async def get_cms_results(worksheet: Worksheet):
+async def get_cms_marks(worksheet: Worksheet):
     label = worksheet.title
     student_numbers = list(get_student_numbers(worksheet).values())
     results = {}
@@ -65,7 +66,7 @@ async def get_cms_results(worksheet: Worksheet):
         for i, it in enumerate(data):
             results[student_numbers[i]] = it
 
-    return results
+    return convert_list_to_dict(results)
 
 
 def open_file():
@@ -94,8 +95,8 @@ async def main():
 
     for ws in workbook:
         sheet: Worksheet = ws
-        cms_results = await get_cms_results(sheet)
-        remarks = get_remarks(sheet, cms_results)
+        cms_marks = await get_cms_marks(sheet)
+        remarks = generate_remarks(sheet, cms_marks)
         remarks_col = get_remark_col(sheet)
         for it in remarks:
             cell: Cell = sheet.cell(row=it, column=remarks_col)

@@ -67,12 +67,12 @@ def __marks_from_cms(course_code: str, results: list[dict[str, float]]):
     return 0.0
 
 
-def convert_to_marks(credit_hours):
+def credit_hours_to_marks(credit_hours):
     marks = (credit_hours * 50) / 2
     return marks
 
 
-def read_student_marks(sheet: Worksheet):
+def read_excel_marks(sheet: Worksheet):
     marks_dict = get_marks_cols(sheet)
     students = get_student_numbers(sheet)
 
@@ -91,13 +91,33 @@ def read_student_marks(sheet: Worksheet):
         results[student_number] = data
 
     return convert_list_to_dict(results)
-    # return results
 
 
-def get_remarks(sheet: Worksheet, cms_marks: dict[int, list[dict[str, float]]]):
+def combine_cms_excel_marks(excel_marks: dict[int, dict], cms_marks: dict[int, dict]):
+    data = {}
 
-    marks_dict = read_student_marks(sheet)
+    for std, results in cms_marks.items():
+        items = {}
+        for course, credits in results.items():
+            items[course] = credit_hours_to_marks(credits)
+        data[std] = items
+
+    for std, results in excel_marks.items():
+        items = {}
+        for course, credits in results.items():
+            data[std][course] = credits
+        # data[std] = items
+
+    return data
+
+
+def generate_remarks(sheet: Worksheet, cms_marks: dict[int, dict]):
+
+    excel_marks = read_excel_marks(sheet)
     students = get_student_numbers(sheet)
+    marks_dict = combine_cms_excel_marks(excel_marks, cms_marks)
+
+    # print(marks_dict)
 
     data = {}
     for student_col in students:
@@ -105,13 +125,14 @@ def get_remarks(sheet: Worksheet, cms_marks: dict[int, list[dict[str, float]]]):
         repeat = []
         sup = []
         for course_code, marks in marks_dict[student_number].items():
-            print(f"{student_number=} {course_code=} {marks=}")
             if is_number(marks):
                 mark_value = float(marks)
                 if mark_value >= 45 and mark_value < 50:
                     sup.append(course_code)
                 elif mark_value < 45:
                     repeat.append(course_code)
+            else:
+                print(f"{student_number=} {course_code=} {marks=}")
 
         remarks = "Proceed"
         if len(repeat) >= 3:
