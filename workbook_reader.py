@@ -1,3 +1,4 @@
+from unittest import result
 import openpyxl
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup
@@ -7,7 +8,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
-from utils import is_number, to_int
+from utils import convert_list_to_dict, is_number, to_int
 from rich import print
 
 
@@ -66,31 +67,51 @@ def __marks_from_cms(course_code: str, results: list[dict[str, float]]):
     return 0.0
 
 
-def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]]):
+def convert_to_marks(credit_hours):
+    marks = (credit_hours * 50) / 2
+    return marks
 
+
+def read_student_marks(sheet: Worksheet):
     marks_dict = get_marks_cols(sheet)
+    students = get_student_numbers(sheet)
+
+    results = {}
+    for student_col in students:
+        student_number = to_int(students[student_col])
+        data = []
+        for mark_col, course_code in marks_dict.items():
+            cell: Cell = sheet.cell(student_col, mark_col)
+            mark_value = None
+            if is_number(cell.value):
+                mark_value = float(cell.value)
+                data.append({
+                    course_code: mark_value
+                })
+        results[student_number] = data
+
+    return convert_list_to_dict(results)
+    # return results
+
+
+def get_remarks(sheet: Worksheet, cms_marks: dict[int, list[dict[str, float]]]):
+
+    marks_dict = read_student_marks(sheet)
     students = get_student_numbers(sheet)
 
     data = {}
     for student_col in students:
         student_number = to_int(students[student_col])
-        results = transcript[student_number]
         repeat = []
         sup = []
-        for mark_col, course_code in marks_dict.items():
-            cell: Cell = sheet.cell(student_col, mark_col)
-            cms_marks = __marks_from_cms(course_code, results)
-            # print(student_number,
-            #       f"{course_code=}: Excel: {cell.value}, CMS: {cms_marks}")
-            mark_value = None
-            if is_number(cell.value):
-                mark_value = float(cell.value)
+        for course_code, marks in marks_dict[student_number].items():
+            print(f"{student_number=} {course_code=} {marks=}")
+            if is_number(marks):
+                mark_value = float(marks)
                 if mark_value >= 45 and mark_value < 50:
                     sup.append(course_code)
                 elif mark_value < 45:
                     repeat.append(course_code)
-            elif cms_marks == 0.0:
-                repeat.append(course_code)
 
         remarks = "Proceed"
         if len(repeat) >= 3:

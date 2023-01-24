@@ -19,7 +19,7 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 from tqdm import tqdm
 
 from credentials import read_credentials, write_credentials
-from workbook_reader import get_remark_col, get_remarks, get_student_numbers
+from workbook_reader import get_remark_col, get_remarks, get_student_numbers, read_student_marks
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")
@@ -52,7 +52,7 @@ async def login():
         logged_in = input_username_and_password()
 
 
-async def get_results(worksheet: Worksheet):
+async def get_cms_results(worksheet: Worksheet):
     label = worksheet.title
     student_numbers = list(get_student_numbers(worksheet).values())
     results = {}
@@ -69,17 +69,18 @@ async def get_results(worksheet: Worksheet):
 
 
 def open_file():
-    file = None
-    while file == None:
-        try:
-            file_path = Prompt.ask(
-                "Excel File:", default="Results 2022-08.xlsx")
-            file_path = file_path.strip('\"')
-            if Path(file_path).is_file():
-                file = file_path
-        except Exception as e:
-            error_console.print("Error:", e)
-    return file
+    # file = None
+    # while file == None:
+    #     try:
+    #         file_path = Prompt.ask(
+    #             "Excel File:", default="Results 2022-08_2.xlsx")
+    #         file_path = file_path.strip('\"')
+    #         if Path(file_path).is_file():
+    #             file = file_path
+    #     except Exception as e:
+    #         error_console.print("Error:", e)
+    # return file
+    return "Results 2022-08_2.xlsx"
 
 
 async def main():
@@ -89,19 +90,19 @@ async def main():
     file = open_file()
     workbook: Workbook = openpyxl.load_workbook(file)
 
-    sheet: Worksheet = workbook.active
+    # sheet: Worksheet = workbook.active
 
     for ws in workbook:
         sheet: Worksheet = ws
-        results = await get_results(sheet)
-        remarks = get_remarks(sheet, results)
+        cms_results = await get_cms_results(sheet)
+        remarks = get_remarks(sheet, cms_results)
         remarks_col = get_remark_col(sheet)
         for it in remarks:
             cell: Cell = sheet.cell(row=it, column=remarks_col)
             cell.value = remarks[it]
 
     workbook.save(file)
-    print("[bold blue] Done!")
+    print("[bold blue]Done!")
 
 if __name__ == '__main__':
     # while True:
