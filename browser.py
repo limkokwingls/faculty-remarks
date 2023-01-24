@@ -23,7 +23,7 @@ class Browser:
             self.logged_in = True
         return self.logged_in
 
-    async def read_transcript(self, student_number: int, semester: int):
+    async def read_transcript(self, student_number: int | str, semester: int):
         response = await self.session.get(urls.transcript(student_number))
         page = BeautifulSoup(response.text, PARSER)
         table = page.select_one("table.ewReportTable")

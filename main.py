@@ -54,15 +54,15 @@ async def login():
 async def get_results(worksheet: Worksheet):
 
     label = worksheet.title
-    student_numbers = get_student_numbers(worksheet)
+    student_numbers = list(get_student_numbers(worksheet).values())
 
-    results = []
+    results = {}
     with console.status(f"Reading {label} transcripts"):
         tasks = []
         for it in student_numbers:
             tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
-    for it in track(asyncio.as_completed(tasks), total=len(tasks), description=f"Downloading {label} transcripts"):
-        results.append(await it)
+    for i, it in enumerate(track(asyncio.as_completed(tasks), total=len(tasks), description=f"Downloading {label} transcripts")):
+        results[student_numbers[i]] = await it
     return results
 
 
@@ -70,7 +70,7 @@ async def main():
     while not browser.logged_in:
         await login()
 
-    file_path = "Results 2022-08.xlsx"
+    file_path = "Results 2022-08_2.xlsx"
     workbook: Workbook = openpyxl.load_workbook(file_path)
 
     sheet: Worksheet = workbook.active
@@ -79,12 +79,14 @@ async def main():
         sheet: Worksheet = ws
         results = await get_results(sheet)
         print(results)
-        # remarks = get_remarks(sheet)
+        # remarks = get_remarks(sheet, results)
         # remarks_col = get_remark_col(sheet)
         # for it in remarks:
         #     print(f"row={it}, col={remarks_col}")
         #     cell: Cell = sheet.cell(row=it, column=remarks_col)
         #     cell.value = remarks[it]
+
+        exit()
 
     workbook.save(file_path)
 
