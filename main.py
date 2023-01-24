@@ -57,7 +57,7 @@ async def get_results(worksheet: Worksheet):
     student_numbers = list(get_student_numbers(worksheet).values())
 
     results = {}
-    with console.status(f"Reading {label} transcripts"):
+    with console.status(f"Reading {label} transcripts..."):
         tasks = []
         for it in student_numbers:
             tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
@@ -81,11 +81,9 @@ async def main():
     for ws in workbook:
         sheet: Worksheet = ws
         results = await get_results(sheet)
-        print(results)
         remarks = get_remarks(sheet, results)
         remarks_col = get_remark_col(sheet)
         for it in remarks:
-            print(f"row={it}, col={remarks_col}")
             cell: Cell = sheet.cell(row=it, column=remarks_col)
             cell.value = remarks[it]
 

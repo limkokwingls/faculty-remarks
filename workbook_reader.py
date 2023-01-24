@@ -62,12 +62,11 @@ def get_student_numbers(sheet: Worksheet) -> dict[int, str]:
 def __marks_from_cms(course_code: str, results: list[dict[str, float]]):
     for it in results:
         if course_code in it:
-            return it[course_code]
+            return float(it[course_code])
+    return 0.0
 
 
 def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]]):
-
-    print(transcript)
 
     marks_dict = get_marks_cols(sheet)
     students = get_student_numbers(sheet)
@@ -81,14 +80,18 @@ def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]])
         for mark_col, course_code in marks_dict.items():
             cell: Cell = sheet.cell(student_col, mark_col)
             cms_marks = __marks_from_cms(course_code, results)
-            print(
-                f"Marks from cms for {student_number}, {course_code=}, {cms_marks=}")
+            # print(student_number,
+            #       f"{course_code=}: Excel: {cell.value}, CMS: {cms_marks}")
+            mark_value = None
             if is_number(cell.value):
                 mark_value = float(cell.value)
                 if mark_value >= 45 and mark_value < 50:
                     sup.append(course_code)
                 elif mark_value < 45:
                     repeat.append(course_code)
+            elif cms_marks == 0.0:
+                repeat.append(course_code)
+
         remarks = "Proceed"
         if len(repeat) >= 3:
             remarks = "Remain in Semester"
