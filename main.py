@@ -1,4 +1,5 @@
 import asyncio
+from pathlib import Path
 from unittest import result
 import openpyxl
 from rich.prompt import Prompt
@@ -52,10 +53,8 @@ async def login():
 
 
 async def get_results(worksheet: Worksheet):
-
     label = worksheet.title
     student_numbers = list(get_student_numbers(worksheet).values())
-
     results = {}
     with console.status(f"Reading {label} transcripts..."):
         tasks = []
@@ -69,12 +68,26 @@ async def get_results(worksheet: Worksheet):
     return results
 
 
+def open_file():
+    file = None
+    while file == None:
+        try:
+            file_path = Prompt.ask(
+                "Excel File:", default="Results 2022-08.xlsx")
+            file_path = file_path.strip('\"')
+            if Path(file_path).is_file():
+                file = file_path
+        except Exception as e:
+            error_console.print("Error:", e)
+    return file
+
+
 async def main():
     while not browser.logged_in:
         await login()
 
-    file_path = "Results 2022-08_2.xlsx"
-    workbook: Workbook = openpyxl.load_workbook(file_path)
+    file = open_file()
+    workbook: Workbook = openpyxl.load_workbook(file)
 
     sheet: Worksheet = workbook.active
 
@@ -87,7 +100,8 @@ async def main():
             cell: Cell = sheet.cell(row=it, column=remarks_col)
             cell.value = remarks[it]
 
-    workbook.save(file_path)
+    workbook.save(file)
+    print("[bold blue] Done!")
 
 if __name__ == '__main__':
     # while True:
