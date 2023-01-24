@@ -1,5 +1,6 @@
 from unittest import result
 import openpyxl
+from model import BorderlineObject
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -144,6 +145,21 @@ def generate_remarks(sheet: Worksheet, cms_marks: dict[int, dict]):
             remarks = f"{remarks}, Repeat " + ", ".join(repeat)
 
         data[student_col] = remarks
+    return data
+
+
+def get_border_lines(sheet: Worksheet) -> list[BorderlineObject]:
+    data = []
+    excel_marks = read_excel_marks(sheet)
+    for std, results in excel_marks.items():
+        for course, marks in results.items():
+            border_line = BorderlineObject(
+                std_class=sheet.title,
+                std_no=std,
+                course=course,
+                marks=marks
+            )
+            data.append(border_line)
     return data
 
 
