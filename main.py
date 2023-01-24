@@ -53,11 +53,11 @@ async def login():
         logged_in = input_username_and_password()
 
 
-async def get_cms_marks(worksheet: Worksheet):
+async def get_cms_marks(worksheet: Worksheet, progress="1/1)"):
     label = worksheet.title
     student_numbers = list(get_student_numbers(worksheet).values())
     results = {}
-    with console.status(f"Reading {label} transcripts..."):
+    with console.status(f"{progress} Reading {label} transcripts..."):
         tasks = []
         for it in student_numbers:
             tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
@@ -70,18 +70,17 @@ async def get_cms_marks(worksheet: Worksheet):
 
 
 def open_file():
-    # file = None
-    # while file == None:
-    #     try:
-    #         file_path = Prompt.ask(
-    #             "Excel File:", default="Results 2022-08_2.xlsx")
-    #         file_path = file_path.strip('\"')
-    #         if Path(file_path).is_file():
-    #             file = file_path
-    #     except Exception as e:
-    #         error_console.print("Error:", e)
-    # return file
-    return "Results 2022-08_2.xlsx"
+    file = None
+    while file == None:
+        try:
+            file_path = Prompt.ask(
+                "Excel File:", default="Results 2022-08.xlsx")
+            file_path = file_path.strip('\"')
+            if Path(file_path).is_file():
+                file = file_path
+        except Exception as e:
+            error_console.print("Error:", e)
+    return file
 
 
 async def main():
@@ -93,9 +92,9 @@ async def main():
 
     # sheet: Worksheet = workbook.active
 
-    for ws in workbook:
+    for i, ws in enumerate(workbook):
         sheet: Worksheet = ws
-        cms_marks = await get_cms_marks(sheet)
+        cms_marks = await get_cms_marks(sheet, progress=f"{i+1}/{len(workbook.sheetnames)})")
         remarks = generate_remarks(sheet, cms_marks)
         remarks_col = get_remark_col(sheet)
         for it in remarks:
