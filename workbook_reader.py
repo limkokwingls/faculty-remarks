@@ -61,13 +61,6 @@ def get_student_numbers(sheet: Worksheet) -> dict[int, str]:
     return data
 
 
-def __marks_from_cms(course_code: str, results: list[dict[str, float]]):
-    for it in results:
-        if course_code in it:
-            return float(it[course_code])
-    return 0.0
-
-
 def credit_hours_to_marks(credit_hours):
     marks = (credit_hours * 50) / 2
     return marks
@@ -92,6 +85,31 @@ def read_excel_marks(sheet: Worksheet):
         results[student_number] = data
 
     return convert_list_to_dict(results)
+
+
+def get_border_line_objects(sheet: Worksheet):
+    marks_dict = get_marks_cols(sheet)
+    students = get_student_numbers(sheet)
+
+    data = []
+    for student_col in students:
+        student_number = to_int(students[student_col])
+        for mark_col, course_code in marks_dict.items():
+            cell: Cell = sheet.cell(student_col, mark_col)
+            mark_value = None
+            if is_number(cell.value):
+                grade: Cell = sheet.cell(student_col, mark_col+1)
+                mark_value = float(cell.value)
+                borderline = BorderlineObject(
+                    std_no=student_number,
+                    std_class=sheet.title,
+                    course=course_code,
+                    marks=mark_value,
+                    grade=grade.value
+                )
+                data.append(borderline)
+
+    return data
 
 
 def combine_cms_excel_marks(excel_marks: dict[int, dict], cms_marks: dict[int, dict]):
@@ -145,21 +163,6 @@ def generate_remarks(sheet: Worksheet, cms_marks: dict[int, dict]):
             remarks = f"{remarks}, Repeat " + ", ".join(repeat)
 
         data[student_col] = remarks
-    return data
-
-
-def get_border_lines(sheet: Worksheet) -> list[BorderlineObject]:
-    data = []
-    excel_marks = read_excel_marks(sheet)
-    for std, results in excel_marks.items():
-        for course, marks in results.items():
-            border_line = BorderlineObject(
-                std_class=sheet.title,
-                std_no=std,
-                course=course,
-                marks=marks
-            )
-            data.append(border_line)
     return data
 
 

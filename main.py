@@ -21,7 +21,7 @@ from tqdm import tqdm
 from credentials import read_credentials, write_credentials
 from model import BorderlineObject
 from utils import convert_list_to_dict
-from workbook_reader import get_border_lines, get_remark_col, generate_remarks, get_student_numbers, read_excel_marks
+from workbook_reader import get_border_line_objects, get_remark_col, generate_remarks, get_student_numbers, read_excel_marks
 
 console = Console()
 error_console = Console(stderr=True, style="bold red")
@@ -100,26 +100,27 @@ async def add_remarks(workbook: Workbook, file):
 def print_borderlines(workbook: Workbook):
     borderlines = []
     for s in workbook:
-        data = get_border_lines(s)
+        data = get_border_line_objects(s)
         for it in data:
             if it.is_borderline():
                 borderlines.append(it)
 
-    print(borderlines)
+    return borderlines
 
 
 async def main():
-    while not browser.logged_in:
-        await login()
+    # while not browser.logged_in:
+    #     await login()
 
     file = open_file()
-    workbook: Workbook = openpyxl.load_workbook(file)
+    with console.status(f"Loading file..."):
+        workbook: Workbook = openpyxl.load_workbook(file)
 
-    _, option = pick(["Add Remarks", "Check Borderlines"])
-    if option == 0:
-        await add_remarks(workbook, file)
-    elif option == 1:
-        print_borderlines(workbook)
+    # _, option = pick(["Add Remarks", "Check Borderlines"])
+    # if option == 0:
+    #     await add_remarks(workbook, file)
+    # elif option == 1:
+    print(print_borderlines(workbook))
 
     print("[bold blue]Done!")
 
