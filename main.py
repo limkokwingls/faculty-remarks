@@ -78,15 +78,12 @@ async def main():
     for ws in workbook:
         sheet: Worksheet = ws
         results = await get_results(sheet)
-        print(results)
-        # remarks = get_remarks(sheet, results)
-        # remarks_col = get_remark_col(sheet)
-        # for it in remarks:
-        #     print(f"row={it}, col={remarks_col}")
-        #     cell: Cell = sheet.cell(row=it, column=remarks_col)
-        #     cell.value = remarks[it]
-
-        exit()
+        remarks = get_remarks(sheet, results)
+        remarks_col = get_remark_col(sheet)
+        for it in remarks:
+            print(f"row={it}, col={remarks_col}")
+            cell: Cell = sheet.cell(row=it, column=remarks_col)
+            cell.value = remarks[it]
 
     workbook.save(file_path)
 

@@ -7,7 +7,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
-from utils import is_number
+from utils import is_number, to_int
 from rich import print
 
 
@@ -59,23 +59,24 @@ def get_student_numbers(sheet: Worksheet) -> dict[int, str]:
     return data
 
 
-def get_remarks(sheet: Worksheet):
-    marks = get_marks_cols(sheet)
+def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]]):
+    marks_dict = get_marks_cols(sheet)
     students = get_student_numbers(sheet)
 
     data = {}
     for student_col in students:
-        student_number = students[student_col]
+        student_number = to_int(students[student_col])
+        results = transcript[student_number]
         repeat = []
         sup = []
-        for mark_col in marks:
-            mark_value = sheet.cell(student_col, mark_col).value
-            if is_number(mark_value):
-                mark_value = int(mark_value)
+        for mark_col, course_code in marks_dict.items():
+            cell: Cell = sheet.cell(student_col, mark_col)
+            if is_number(cell.value):
+                mark_value = float(cell.value)
                 if mark_value >= 45 and mark_value < 50:
-                    sup.append(marks[mark_col])
+                    sup.append(course_code)
                 elif mark_value < 45:
-                    repeat.append(marks[mark_col])
+                    repeat.append(course_code)
         remarks = "Proceed"
         if len(repeat) >= 3:
             remarks = "Remain in Semester"
