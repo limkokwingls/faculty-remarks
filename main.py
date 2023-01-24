@@ -15,7 +15,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
-
+from tqdm import tqdm
 
 from credentials import read_credentials, write_credentials
 from workbook_reader import get_remark_col, get_remarks, get_student_numbers
@@ -61,8 +61,11 @@ async def get_results(worksheet: Worksheet):
         tasks = []
         for it in student_numbers:
             tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
-    for i, it in enumerate(track(asyncio.as_completed(tasks), total=len(tasks), description=f"Downloading {label} transcripts")):
-        results[student_numbers[i]] = await it
+        data = await asyncio.gather(*tasks)
+
+        for i, it in enumerate(data):
+            results[student_numbers[i]] = it
+
     return results
 
 
@@ -78,6 +81,7 @@ async def main():
     for ws in workbook:
         sheet: Worksheet = ws
         results = await get_results(sheet)
+        print(results)
         remarks = get_remarks(sheet, results)
         remarks_col = get_remark_col(sheet)
         for it in remarks:

@@ -59,7 +59,16 @@ def get_student_numbers(sheet: Worksheet) -> dict[int, str]:
     return data
 
 
+def __marks_from_cms(course_code: str, results: list[dict[str, float]]):
+    for it in results:
+        if course_code in it:
+            return it[course_code]
+
+
 def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]]):
+
+    print(transcript)
+
     marks_dict = get_marks_cols(sheet)
     students = get_student_numbers(sheet)
 
@@ -71,6 +80,9 @@ def get_remarks(sheet: Worksheet, transcript: dict[int, list[dict[str, float]]])
         sup = []
         for mark_col, course_code in marks_dict.items():
             cell: Cell = sheet.cell(student_col, mark_col)
+            cms_marks = __marks_from_cms(course_code, results)
+            print(
+                f"Marks from cms for {student_number}, {course_code=}, {cms_marks=}")
             if is_number(cell.value):
                 mark_value = float(cell.value)
                 if mark_value >= 45 and mark_value < 50:
