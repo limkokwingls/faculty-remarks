@@ -13,7 +13,7 @@ class Session:
         # limits = httpx.Limits(
         #     max_keepalive_connections=None, max_connections=None)
         self.client = httpx.AsyncClient(
-            follow_redirects=True, transport=transport, timeout=30.0)
+            follow_redirects=True, transport=transport, timeout=(90, 120))
         self.logged_in = False
 
     async def post(self, url, data):
