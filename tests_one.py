@@ -30,14 +30,18 @@ def format_sheet(sheet: Worksheet):
 
 def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
 
-    for row_i, row in enumerate(html_table, start=1):
-        for col_i, col in enumerate(row, start=1):
-            text = col.get_text(strip=True)
-            cell: Cell = sheet.cell(row=row_i, column=col_i)
-            if row_i == 3 and col_i == 1:
-                text = col.get_text(separator='\n', strip=True)
-
+    for tr_i, tr in enumerate(html_table, start=1):
+        for td_i, td in enumerate(tr.find_all('td'), start=1):
+            cell: Cell = sheet.cell(row=tr_i, column=td_i)
+            text = td.get_text(strip=True)
+            if tr_i == 3 and td_i == 1:
+                text = td.get_text(separator='\n', strip=True)
             cell.value = text
+            # if td.get('colspan'):
+            #     span = int(td.get('colspan'))
+            #     print("******", span)
+            #     sheet.merge_cells(start_row=tr_i, start_column=td_i,
+            #                       end_row=tr_i, end_column=span)
     format_sheet(sheet)
 
 
