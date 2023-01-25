@@ -8,7 +8,7 @@ from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
 
-from utils.excel import delete_empty_columns
+from utils.excel import delete_empty_columns, is_merged_cell
 
 PARSER = "html5lib"
 
@@ -36,12 +36,13 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
             text = td.get_text(strip=True)
             if tr_i == 3 and td_i == 1:
                 text = td.get_text(separator='\n', strip=True)
-            cell.value = text
-            # if td.get('colspan'):
-            #     span = int(td.get('colspan'))
-            #     print("******", span)
-            #     sheet.merge_cells(start_row=tr_i, start_column=td_i,
-            #                       end_row=tr_i, end_column=span)
+            if not is_merged_cell(sheet, cell):
+                cell.value = text
+                if td.get('colspan'):
+                    span = int(td.get('colspan'))
+                    sheet.merge_cells(start_row=cell.row, start_column=cell.column,
+                                      end_row=cell.row, end_column=cell.column+span)
+
     format_sheet(sheet)
 
 
