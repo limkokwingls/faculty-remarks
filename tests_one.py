@@ -18,32 +18,26 @@ def format_sheet(sheet: Worksheet):
                     right=Side(style='thin'),
                     top=Side(style='thin'),
                     bottom=Side(style='thin'))
+    # cell.border = border
     delete_empty_columns(sheet)
-    # was_deleted = False
-    for i, col in enumerate(sheet.iter_cols()):
-        # if not was_deleted:
-        #     sheet.delete_cols(i, i)
-        for cell in col:
-            ...
-            # cell.border = border
+    sheet.delete_rows(1, 3)
+    sheet.row_dimensions[1].height = 120  # type:ignore
+
+    first_cell = sheet['A1']
+    first_cell.alignment = Alignment(
+        vertical='center', wrap_text=True)
 
 
 def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
-    title_printed = False
-    for row_i, row in enumerate(html_table):
-        if title_printed:
-            row_i += 3
-        for col_i, col in enumerate(row):
-            val = col.get_text(strip=True)
-            cell: Cell = sheet.cell(row=row_i+1, column=col_i+1)
+
+    for row_i, row in enumerate(html_table, start=1):
+        for col_i, col in enumerate(row, start=1):
+            text = col.get_text(strip=True)
+            cell: Cell = sheet.cell(row=row_i, column=col_i)
             if row_i == 3 and col_i == 1:
-                val = col.get_text(separator='\n', strip=True)
-            if row_i == 3:
-                sheet.column_dimensions[cell.column_letter].width = 37
-                sheet.row_dimensions[cell.row].height = 120
-                cell.alignment = Alignment(
-                    vertical='center', wrap_text=True)
-            cell.value = val
+                text = col.get_text(separator='\n', strip=True)
+
+            cell.value = text
     format_sheet(sheet)
 
 
