@@ -29,6 +29,9 @@ def format_sheet(sheet: Worksheet):
             if cell.column == last_col:
                 sheet.merge_cells(start_row=cell.row, end_row=cell.row,
                                   start_column=last_col, end_column=last_col+3)
+    for row in sheet.iter_rows(min_row=first_row):
+        for c in row:
+            cell: Cell = c
             cell.border = Border(left=Side(style='thin'),
                                  right=Side(style='thin'),
                                  top=Side(style='thin'),
