@@ -8,6 +8,22 @@ class Result:
 
 
 @dataclass
+class Grades:
+    course_name: str
+    course_code: str
+    marks: float
+    grade: str
+    points: float
+
+
+@dataclass
+class Student:
+    name: str
+    number: str
+    grades: list[Grades]
+
+
+@dataclass
 class BorderlineObject:
     std_no: str | int
     std_class: str
