@@ -83,15 +83,16 @@ def read_grades(html_table: ResultSet[Tag]):
     courses = __get_courses(html_table)
     std_details = __get_std_details(html_table[7:])
 
-    for i, it in enumerate(std_details, start=2):
+    for it in std_details:
         std_name, std_id = it[0], it[1]
         grades = []
-        for x in range(2, len(it), 3):
+        for i in range(2, len(it), 3):
+            course_i = -1
             course_grade = CourseGrades(
-                course=None,
-                marks=it[x],
-                grade=it[x+1],
-                points=it[x+2]
+                course=courses[course_i := course_i + 1],
+                marks=it[i],
+                grade=it[i+1],
+                points=it[i+2]
             )
             grades.append(course_grade)
         std = Student(id=std_id, name=std_name, grades=grades)

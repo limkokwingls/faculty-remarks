@@ -15,7 +15,7 @@ class Course:
 
 @dataclass
 class CourseGrades:
-    course: Course | None  # Remove None
+    course: Course
     marks: float
     grade: str
     points: float
