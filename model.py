@@ -8,9 +8,14 @@ class Result:
 
 
 @dataclass
-class Grades:
-    course_name: str
-    course_code: str
+class Course:
+    code: str
+    name: str
+
+
+@dataclass
+class CourseGrades:
+    course: Course | None  # Remove None
     marks: float
     grade: str
     points: float
@@ -18,9 +23,9 @@ class Grades:
 
 @dataclass
 class Student:
+    id: str
     name: str
-    number: str
-    grades: list[Grades]
+    grades: list[CourseGrades]
 
 
 @dataclass

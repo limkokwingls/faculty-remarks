@@ -1,7 +1,8 @@
+from calendar import c
 from turtle import title
 import openpyxl
 from html_utils import get_background
-from model import Student
+from model import Course, CourseGrades, Student
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup, ResultSet, Tag
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
@@ -17,8 +18,8 @@ from utils.excel import delete_empty_columns, fit_column_width, is_merged_cell, 
 PARSER = "html5lib"
 
 
-def get_course_names(tr: Tag):
-    data = {}
+def __get_course_names(tr: Tag):
+    data = []
     td: Tag
     for i, td in enumerate(tr.find_all('td')):
         text = td.get_text(strip=True)
@@ -26,12 +27,12 @@ def get_course_names(tr: Tag):
             continue
         if text == 'No. of Module(s)':
             break
-        data[i] = text
+        data.append(text)
     return data
 
 
-def get_course_codes(tr: Tag):
-    data = {}
+def __get_course_codes(tr: Tag):
+    data = []
     td: Tag
     for i, td in enumerate(tr.find_all('td')):
         text = td.get_text(strip=True)
@@ -39,23 +40,64 @@ def get_course_codes(tr: Tag):
             continue
         if not text:
             break
-        data[i] = text
+        data.append(text)
+    return data
+
+
+def __get_courses(html_table: list[Tag]):
+    course_names = __get_course_names(html_table[3])
+    course_codes = __get_course_codes(html_table[4])
+
+    data: list[Course] = []
+    for i in range(len(course_codes)):
+        data.append(
+            Course(
+                code=course_codes[i],
+                name=course_names[i],
+            )
+        )
+    return data
+
+
+def __get_std_details(html_table: list[Tag]):
+    data = []
+    for tr in html_table:
+        td_list = tr.find_all('td')
+        std_attr = []
+        for i, td in enumerate(td_list):
+            if i == 0 or i == 3 or i > len(td_list) - 3:
+                continue
+            text = td.get_text(strip=True)
+            if td.get('colspan'):
+                span = int(td.get('colspan'))
+                std_attr += [None for it in range(span)]
+            else:
+                std_attr.append(text)
+        # -6 so as to remove unneeded data that comes after the last course grades
+        data.append(std_attr[:-6])
     return data
 
 
 def read_grades(html_table: ResultSet[Tag]):
-    course_names = get_course_names(html_table[3])
-    course_codes = get_course_codes(html_table[4])
-    for tr_i, tr in enumerate(html_table):
-        if tr_i < 3:
-            continue
-        td: Tag
-        for td_i, td in enumerate(tr.find_all('td')):
-            text = td.get_text(strip=True)
-            #     std = Student()
-            # print(tr_i, td_i, text)
+    data = []
+    courses = __get_courses(html_table)
+    std_details = __get_std_details(html_table[7:])
 
-    print(course_codes)
+    for i, it in enumerate(std_details, start=2):
+        std_name, std_id = it[0], it[1]
+        grades = []
+        for x in range(2, len(it), 3):
+            course_grade = CourseGrades(
+                course=None,
+                marks=it[x],
+                grade=it[x+1],
+                points=it[x+2]
+            )
+            grades.append(course_grade)
+        std = Student(id=std_id, name=std_name, grades=grades)
+        data.append(std)
+        break
+    return data
 
 
 def main():
@@ -63,8 +105,12 @@ def main():
         html = file.read()
         soup = BeautifulSoup(html, PARSER)
         table = soup.select('.ewReportTable tr')
-        read_grades(table)
+        grades = read_grades(table)
+        print(grades)
+
+        # std_details = __get_std_details(table[7:])
+        # print(std_details[0])
 
 
 if __name__ == '__main__':
-    print(main())
+    main()
