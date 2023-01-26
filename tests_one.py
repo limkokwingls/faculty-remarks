@@ -35,7 +35,6 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
     for tr_i, tr in enumerate(html_table, start=1):
         col_i = 1
         for td in tr.find_all('td'):
-            col_i += 1
             cell: Cell = sheet.cell(row=tr_i, column=col_i)
             text = td.get_text(strip=True)
             if tr_i == 3 and col_i == 1:
@@ -46,9 +45,10 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
                     span = int(td.get('colspan'))
                     col_i += span
                     sheet.merge_cells(start_row=cell.row, start_column=cell.column,
-                                      end_row=cell.row, end_column=cell.column+span)
+                                      end_row=cell.row, end_column=cell.column+(span-1))
                     cell.alignment = Alignment(horizontal='center')
-
+                else:
+                    col_i += 1
                 try:
                     workbook.save("data.xlsx")
                 except:
