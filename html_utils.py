@@ -1,6 +1,17 @@
 from bs4 import Tag
 
 
+def get_background(tag):
+    style = tag.attrs.get('style')
+    color = "#FFFFFF"
+    if style:
+        styles = style.split(';')
+        for s in styles:
+            if 'background-color' in s:
+                color = s.split(':')[1].strip()
+    return color.replace("#", "00")
+
+
 def read_table(table: Tag):
     data = []
     rows = table.select('tr:not(:first-child)')
@@ -24,5 +35,5 @@ def find_link_in_table(table: Tag, search_key: str, target_link_text: str):
                 col = cols[i]
                 text = col.get_text(strip=True)
                 anchor = col.findChild("a")
-                if(text == target_link_text):
+                if (text == target_link_text):
                     return anchor.attrs["href"]

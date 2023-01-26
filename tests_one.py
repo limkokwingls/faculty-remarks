@@ -1,5 +1,6 @@
 from turtle import title
 import openpyxl
+from html_utils import get_background
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup, ResultSet, Tag
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
@@ -52,7 +53,6 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
                 text = "\n".join(text[:-1])
             if not is_merged_cell(sheet, cell):
                 set_value(cell, text)
-
                 if td.get('colspan'):
                     span = int(td.get('colspan'))
                     col_i += span
@@ -62,11 +62,15 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
                         horizontal='center', vertical='center')
                 else:
                     col_i += 1
+
+                # Add background color if any
+                bg_color = openpyxl.styles.PatternFill(  # type: ignore
+                    start_color=get_background(td), end_color=get_background(td), fill_type="solid")
+                cell.fill = bg_color
     format_sheet(sheet)
 
 
 def html_to_excel():
-
     workbook = Workbook()
     sheet: Worksheet = workbook.active
 
