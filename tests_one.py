@@ -14,21 +14,25 @@ PARSER = "html5lib"
 
 
 def format_sheet(sheet: Worksheet):
-    border = Border(left=Side(style='thin'),
-                    right=Side(style='thin'),
-                    top=Side(style='thin'),
-                    bottom=Side(style='thin'))
+    first_row = 4
+    last_col = sheet.max_column
 
-    sheet.row_dimensions[4].height = 120  # type:ignore
+    sheet.row_dimensions[first_row].height = 120  # type:ignore
 
     first_cell = sheet['A4']
     first_cell.alignment = Alignment(
         vertical='center', horizontal='left', wrap_text=True)
 
-    for row in sheet.iter_rows(min_row=4):
-        for cell in row:
-            cell.border = border
-    # sheet.delete_rows(1, 3)
+    for row in sheet.iter_rows(min_row=first_row):
+        for c in row:
+            cell: Cell = c
+            if cell.column == last_col:
+                sheet.merge_cells(start_row=cell.row, end_row=cell.row,
+                                  start_column=last_col, end_column=last_col+3)
+            cell.border = Border(left=Side(style='thin'),
+                                 right=Side(style='thin'),
+                                 top=Side(style='thin'),
+                                 bottom=Side(style='thin'))
 
 
 def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
@@ -45,8 +49,8 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
                 if td.get('colspan'):
                     span = int(td.get('colspan'))
                     col_i += span
-                    sheet.merge_cells(start_row=cell.row, start_column=cell.column,
-                                      end_row=cell.row, end_column=cell.column+(span-1))
+                    sheet.merge_cells(start_row=cell.row, end_row=cell.row,
+                                      start_column=cell.column, end_column=cell.column+(span-1))
                     cell.alignment = Alignment(
                         horizontal='center', vertical='center')
                 else:
