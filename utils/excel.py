@@ -3,6 +3,12 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.cell.cell import Cell
 
 
+def fit_column_width(sheet: Worksheet, column_letter: str):
+    col = sheet.column_dimensions[column_letter]  # type: ignore
+    max_length = max(len(str(cell.value)) for cell in sheet[column_letter])
+    col.width = max_length + 2
+
+
 def set_value(cell: Cell, value: str):
     if type(value) == NoneType:
         return
