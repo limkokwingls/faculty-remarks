@@ -4,7 +4,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
-from utils import convert_list_to_dict, is_number, to_int
+from utils.common import convert_list_to_dict, is_number, to_int
 from rich import print
 
 

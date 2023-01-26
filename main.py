@@ -13,7 +13,7 @@ from openpyxl.cell.cell import Cell
 
 from credentials import read_credentials, write_credentials
 from model import BorderlineObject
-from utils import convert_list_to_dict
+from utils.common import convert_list_to_dict
 from workbook_reader import get_border_line_objects, get_remark_col, generate_remarks, get_student_numbers
 
 console = Console()
@@ -68,7 +68,7 @@ def open_file():
     while file == None:
         try:
             file_path = Prompt.ask(
-                "Excel File:", default="Results 2022-08.xlsx")
+                "Excel File:", default="Results 2022-08_2.xlsx")
             file_path = file_path.strip('\"')
             if Path(file_path).is_file():
                 file = file_path
