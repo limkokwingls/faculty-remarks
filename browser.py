@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from html_utils import read_table
+from model import Course, CourseGrades
 from session import Session
 import urls
 from rich.console import Console
@@ -60,9 +61,13 @@ class Browser:
                 and ('Total' not in it)]
         results = []
         for it in data:
-            try:
-                result = {it[0]: float(it[-3])}
-                results.append(result)
-            except:
-                print("Error results: ", it)
+            # try:
+            course_grade = CourseGrades(
+                course=Course(code=it[0], name=it[1]), grade=it[3],
+                marks=CourseGrades.marks_from_points(it[7]), points=it[7]
+            )
+            result = {it[0]: course_grade}
+            results.append(result)
+            # except Exception as ex:
+            #     print(f"{it} caused an error: ", ex)
         return results

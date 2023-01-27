@@ -123,15 +123,16 @@ def __get_student_data(html_table: ResultSet[Tag]) -> list[Student]:
         std_name, std_id = it[0], it[1]
         grades = []
         for i in range(2, len(it), 3):
-            course_i = -1
+            course_i = 0
             course_grade = CourseGrades(
-                course=courses[course_i := course_i + 1],
+                course=courses[course_i],
                 marks=it[i],
                 grade=it[i+1],
                 points=it[i+2]
             )
+            course_i += 1
             grades.append(course_grade)
-        std = Student(id=std_id, name=std_name, grades=grades)
+        std = Student(std_no=std_id, name=std_name, grades=grades)
         data.append(std)
     return data
 
@@ -151,11 +152,35 @@ async def __read_transcripts(student_numbers: list[str], semester: int):
     return convert_list_to_dict(results)
 
 
-async def generate_remarks(html_table: ResultSet[Tag], semester: int):
+async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: int):
     std_grades = __get_student_data(html_table)
-    std_numbers = [it.id for it in std_grades]
+    std_numbers = [it.std_no for it in std_grades]
     transcripts = await __read_transcripts(std_numbers, semester)
-    print(transcripts)
+
+    data = []
+    for std in std_grades:
+        repeat = []
+        sup = []
+        for grades in std.grades:
+            if not grades.marks:
+                continue
+            if grades.marks >= 45 and grades.marks < 50:
+                sup.append(grades.course.code)
+            elif grades.marks < 45:
+                repeat.append(grades.course.code)
+
+        remarks = "Proceed"
+        if len(repeat) >= 3:
+            remarks = "Remain in Semester"
+
+        if len(sup) > 0:
+            remarks = f"{remarks}, Sup " + ", ".join(sup)
+        if len(repeat) > 0:
+            remarks = f"{remarks}, Repeat " + ", ".join(repeat)
+
+        std.remarks = remarks
+        data.append(std)
+    return data
 
 
 async def main():
@@ -168,11 +193,11 @@ async def main():
         html = file.read()
         soup = BeautifulSoup(html, PARSER)
         table = soup.select('.ewReportTable tr')
-        remarks = await generate_remarks(table, semester)
+        # remarks = await get_student_marks_with_remarks(table, semester)
         # print(remarks)
 
-        # std_details = __get_std_details(table[7:])
-        # print(std_details[0])
+        students = __get_student_data(table)
+        # print(students)
 
 
 if __name__ == '__main__':

@@ -16,11 +16,21 @@ class Course:
 @dataclass
 class CourseGrades:
     course: Course
-    marks: float
     grade: str
-    points: float
+    marks: float | None
+    points: float | None
+
+    def __post_init__(self):
+        self.marks = float(self.marks) if self.marks else None
+        self.points = float(self.points) if self.points else None
+
+    @staticmethod
+    def marks_from_points(points):
+        return (float(points) * 50) / 2
 
     def is_borderline(self):
+        if not self.marks:
+            return False
         if self.marks >= 44:
             s = str(self.marks)
             if "." in s:
@@ -34,9 +44,10 @@ class CourseGrades:
 
 @dataclass
 class Student:
-    id: str
+    std_no: str
     name: str
     grades: list[CourseGrades]
+    remarks: str = ""
 
 
 @dataclass
