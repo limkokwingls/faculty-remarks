@@ -66,8 +66,7 @@ class Browser:
                     course=Course(code=it[0], name=it[1]), grade=it[2],
                     marks=CourseGrades.marks_from_points(it[-2]), points=it[-2]
                 )
-                result = {it[0]: course_grade}
-                results.append(result)
+                results.append(course_grade)
             except Exception as ex:
                 print(f"{it} caused an error: ", ex)
         return results

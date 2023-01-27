@@ -148,7 +148,11 @@ async def __read_transcripts(student_numbers: list[str], semester: int):
         for i, it in enumerate(data):
             results[student_numbers[i]] = it
 
-    return convert_list_to_dict(results)
+    return results
+
+
+def __add_transcript_to_students(students: list[Student], transcripts: dict[str, CourseGrades]):
+    pass
 
 
 async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: int):
@@ -156,6 +160,16 @@ async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: i
     std_numbers = [it.std_no for it in std_grades]
     transcripts = await __read_transcripts(std_numbers, semester)
 
+    __add_transcript_to_students(std_grades, transcripts)
+
+    for key, value in transcripts.items():
+        print(key, value)
+        break
+
+    print("\n\n\nstd_grades[1]=")
+    print(std_grades[1])
+
+    return
     data = []
     for std in std_grades:
         repeat = []
@@ -194,6 +208,9 @@ async def main():
         table = soup.select('.ewReportTable tr')
         remarks = await get_student_marks_with_remarks(table, semester)
         print(remarks)
+
+        # transcripts = await __read_transcripts(['901013280'], semester)
+        # print(transcripts)
 
 
 if __name__ == '__main__':

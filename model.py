@@ -26,6 +26,7 @@ class CourseGrades:
 
     @staticmethod
     def marks_from_points(points):
+        # TODO: I don't think this formula is correct
         return (float(points) * 50) / 2
 
     def is_borderline(self):
