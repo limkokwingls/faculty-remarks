@@ -151,27 +151,33 @@ async def __read_transcripts(student_numbers: list[str], semester: int):
     return results
 
 
-def __add_transcript_to_students(students: list[Student], transcripts: dict[str, CourseGrades]):
-    pass
+def __add_transcript_to_students(students: list[Student], transcripts: dict[str, list[CourseGrades]]):
+    for std in students:
+        result_grades = std.grades
+        print(f"{std.std_no=}")
+        print("before", std.grades)
+        std.grades = transcripts[std.std_no]
+        print("after", std.grades)
+        break
 
 
 async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: int):
-    std_grades = __get_student_data(html_table)
-    std_numbers = [it.std_no for it in std_grades]
+    students = __get_student_data(html_table)
+    std_numbers = [it.std_no for it in students]
     transcripts = await __read_transcripts(std_numbers, semester)
 
-    __add_transcript_to_students(std_grades, transcripts)
+    __add_transcript_to_students(students, transcripts)
 
-    for key, value in transcripts.items():
-        print(key, value)
-        break
+    # for key, value in transcripts.items():
+    #     print(key, value)
+    #     break
 
-    print("\n\n\nstd_grades[1]=")
-    print(std_grades[1])
+    # print("\n\n\nstudents[1]=")
+    # print(students[1])
 
     return
     data = []
-    for std in std_grades:
+    for std in students:
         repeat = []
         sup = []
         for grades in std.grades:
@@ -202,7 +208,7 @@ async def main():
 
     semester = 1
 
-    with open(test_pages("graderesult.php.html")) as file:
+    with open(test_pages("graderesult_reduced.php.html")) as file:
         html = file.read()
         soup = BeautifulSoup(html, PARSER)
         table = soup.select('.ewReportTable tr')

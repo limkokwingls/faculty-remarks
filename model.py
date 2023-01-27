@@ -25,9 +25,8 @@ class CourseGrades:
         self.points = float(self.points) if self.points else None
 
     @staticmethod
-    def marks_from_points(points):
-        # TODO: I don't think this formula is correct
-        return (float(points) * 50) / 2
+    def marks_from_points(gpa_points):
+        return int((float(gpa_points)*70) / 3.33)
 
     def is_borderline(self):
         if not self.marks:
