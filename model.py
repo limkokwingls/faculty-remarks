@@ -20,6 +20,17 @@ class CourseGrades:
     grade: str
     points: float
 
+    def is_borderline(self):
+        if self.marks >= 44:
+            s = str(self.marks)
+            if "." in s:
+                s = s.split(".")[0]
+            if s == '48' or s.endswith("9") or s.endswith("4"):
+                return True
+            if self.marks >= 45 and self.marks <= 49:
+                return self.grade.lower() != 'pp'
+        return False
+
 
 @dataclass
 class Student:

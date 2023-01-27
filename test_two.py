@@ -1,8 +1,6 @@
-from calendar import c
 from turtle import title
 import openpyxl
 from html_utils import get_background
-from model import Course, CourseGrades, Student
 from test_pages.files import test_pages
 from bs4 import BeautifulSoup, ResultSet, Tag
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
@@ -10,108 +8,84 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.cell.cell import Cell
 from openpyxl.utils.dataframe import dataframe_to_rows
-from bs4.element import Tag
-from rich import print
 
 from utils.excel import delete_empty_columns, fit_column_width, is_merged_cell, set_value
 
 PARSER = "html5lib"
 
 
-def __get_course_names(tr: Tag):
-    data = []
-    td: Tag
-    for i, td in enumerate(tr.find_all('td')):
-        text = td.get_text(strip=True)
-        if i == 0:
-            continue
-        if text == 'No. of Module(s)':
-            break
-        data.append(text)
-    return data
+def format_sheet(sheet: Worksheet):
+    first_row = 4
+    last_col = sheet.max_column
+
+    sheet.row_dimensions[first_row].height = 120  # type:ignore
+
+    first_cell = sheet['A4']
+    first_cell.alignment = Alignment(
+        vertical='center', horizontal='left', wrap_text=True)
+
+    for row in sheet.iter_rows(min_row=first_row):
+        for c in row:
+            cell: Cell = c
+            if cell.column == last_col:
+                sheet.merge_cells(start_row=cell.row, end_row=cell.row,
+                                  start_column=last_col, end_column=last_col+3)
+    for row in sheet.iter_rows(min_row=first_row):
+        for c in row:
+            cell: Cell = c
+            cell.border = Border(left=Side(style='thin'),
+                                 right=Side(style='thin'),
+                                 top=Side(style='thin'),
+                                 bottom=Side(style='thin'))
+
+    fit_column_width(sheet, 'B')
+    fit_column_width(sheet, 'C')
 
 
-def __get_course_codes(tr: Tag):
-    data = []
-    td: Tag
-    for i, td in enumerate(tr.find_all('td')):
-        text = td.get_text(strip=True)
-        if i == 0:
-            continue
-        if not text:
-            break
-        data.append(text)
-    return data
-
-
-def __get_courses(html_table: list[Tag]):
-    course_names = __get_course_names(html_table[3])
-    course_codes = __get_course_codes(html_table[4])
-
-    data: list[Course] = []
-    for i in range(len(course_codes)):
-        data.append(
-            Course(
-                code=course_codes[i],
-                name=course_names[i],
-            )
-        )
-    return data
-
-
-def __get_std_details(html_table: list[Tag]):
-    data = []
-    for tr in html_table:
-        td_list = tr.find_all('td')
-        std_attr = []
-        for i, td in enumerate(td_list):
-            if i == 0 or i == 3 or i > len(td_list) - 3:
-                continue
+def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
+    for tr_i, tr in enumerate(html_table, start=1):
+        col_i = 1
+        for td in tr.find_all('td'):
+            cell: Cell = sheet.cell(row=tr_i, column=col_i)
             text = td.get_text(strip=True)
-            if td.get('colspan'):
-                span = int(td.get('colspan'))
-                std_attr += [None for it in range(span)]
-            else:
-                std_attr.append(text)
-        # -6 so as to remove unneeded data that comes after the last course grades
-        data.append(std_attr[:-6])
-    return data
+            if tr_i == 4 and col_i == 1:
+                text = td.get_text(separator='\n', strip=True).splitlines()
+                text = "\n".join(text[:-1])
+            if not is_merged_cell(sheet, cell):
+                set_value(cell, text)
+                if td.get('colspan'):
+                    span = int(td.get('colspan'))
+                    col_i += span
+                    sheet.merge_cells(start_row=cell.row, end_row=cell.row,
+                                      start_column=cell.column, end_column=cell.column+(span-1))
+                    cell.alignment = Alignment(
+                        horizontal='center', vertical='center')
+                else:
+                    col_i += 1
+
+                # Add background color if any
+                bg_color = openpyxl.styles.PatternFill(  # type: ignore
+                    start_color=get_background(td), end_color=get_background(td), fill_type="solid")
+                cell.fill = bg_color
+    format_sheet(sheet)
 
 
-def read_grades(html_table: ResultSet[Tag]):
-    data = []
-    courses = __get_courses(html_table)
-    std_details = __get_std_details(html_table[7:])
+def html_to_excel():
+    workbook = Workbook()
+    sheet: Worksheet = workbook.active
 
-    for it in std_details:
-        std_name, std_id = it[0], it[1]
-        grades = []
-        for i in range(2, len(it), 3):
-            course_i = -1
-            course_grade = CourseGrades(
-                course=courses[course_i := course_i + 1],
-                marks=it[i],
-                grade=it[i+1],
-                points=it[i+2]
-            )
-            grades.append(course_grade)
-        std = Student(id=std_id, name=std_name, grades=grades)
-        data.append(std)
-        break
-    return data
-
-
-def main():
     with open(test_pages("graderesult.php.html")) as file:
         html = file.read()
         soup = BeautifulSoup(html, PARSER)
         table = soup.select('.ewReportTable tr')
-        grades = read_grades(table)
-        print(grades)
+        write_to_sheet(sheet, table)
 
-        # std_details = __get_std_details(table[7:])
-        # print(std_details[0])
+    workbook.save("data.xlsx")
+
+
+def main():
+    html_to_excel()
 
 
 if __name__ == '__main__':
-    main()
+    print(main())
