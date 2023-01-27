@@ -122,15 +122,14 @@ def __get_student_data(html_table: ResultSet[Tag]) -> list[Student]:
     for it in std_details:
         std_name, std_id = it[0], it[1]
         grades = []
+        course_i = -1
         for i in range(2, len(it), 3):
-            course_i = 0
             course_grade = CourseGrades(
-                course=courses[course_i],
+                course=courses[course_i := course_i + 1],
                 marks=it[i],
                 grade=it[i+1],
                 points=it[i+2]
             )
-            course_i += 1
             grades.append(course_grade)
         std = Student(std_no=std_id, name=std_name, grades=grades)
         data.append(std)
@@ -193,11 +192,8 @@ async def main():
         html = file.read()
         soup = BeautifulSoup(html, PARSER)
         table = soup.select('.ewReportTable tr')
-        # remarks = await get_student_marks_with_remarks(table, semester)
-        # print(remarks)
-
-        students = __get_student_data(table)
-        # print(students)
+        remarks = await get_student_marks_with_remarks(table, semester)
+        print(remarks)
 
 
 if __name__ == '__main__':
