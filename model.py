@@ -12,6 +12,33 @@ class Course:
     code: str
     name: str
 
+    def __hash__(self) -> int:
+        return hash(self.clean_name())
+
+    def __eq__(self, obj) -> bool:
+        if self.code.upper() == obj.code.upper():
+            return True
+        if self.clean_name() == obj.clean_name():
+            return True
+        return False
+
+    def clean_name(self):
+        new_name = self.name.upper()
+        new_name = new_name.replace(" I ", " 1 ")
+        new_name = new_name.replace(" II ", " 2 ")
+        new_name = new_name.replace(" III ", " 3 ")
+        new_name = new_name.replace(" & ", " AND ")
+        new_name = new_name.replace(
+            "with Java Script".upper(), "in JavaScript".upper())
+        if new_name.endswith("III"):
+            new_name = new_name[:-3] + "3"
+        if new_name.endswith("II"):
+            new_name = new_name[:-2] + "2"
+        if new_name.endswith("I"):
+            new_name = new_name[:-1] + "1"
+
+        return new_name.upper()
+
 
 @dataclass
 class CourseGrades:

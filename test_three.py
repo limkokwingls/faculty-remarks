@@ -151,31 +151,25 @@ async def __read_transcripts(student_numbers: list[str], semester: int):
     return results
 
 
-def __add_transcript_to_students(students: list[Student], transcripts: dict[str, list[CourseGrades]]):
-    for std in students:
-        result_grades = std.grades
-        print(f"{std.std_no=}")
-        print("before", std.grades)
-        std.grades = transcripts[std.std_no]
-        print("after", std.grades)
-        break
+def remove_failed_passed_courses(items: list[CourseGrades]) -> list[CourseGrades]:
+    passed_courses = [x.course for x in items if x.grade != 'F']
+    deletable = []
+
+    for it in items:
+        if it.course in passed_courses and it.grade == 'F':
+            deletable.append(it)
+
+    return [x for x in items if x not in deletable]
 
 
 async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: int):
     students = __get_student_data(html_table)
     std_numbers = [it.std_no for it in students]
     transcripts = await __read_transcripts(std_numbers, semester)
+    for std in students:
+        results: list[CourseGrades] = transcripts[std.std_no] + std.grades
+        std.grades = remove_failed_passed_courses(results)
 
-    __add_transcript_to_students(students, transcripts)
-
-    # for key, value in transcripts.items():
-    #     print(key, value)
-    #     break
-
-    # print("\n\n\nstudents[1]=")
-    # print(students[1])
-
-    return
     data = []
     for std in students:
         repeat = []
