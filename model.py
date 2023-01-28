@@ -16,6 +16,9 @@ class Course:
         return hash(self.clean_name())
 
     def __eq__(self, obj) -> bool:
+        if type(obj) != type(self):
+            raise Exception(
+                f"Cannot compare {type(obj)} and {type(self)}")
         if self.code.upper() == obj.code.upper():
             return True
         if self.clean_name() == obj.clean_name():

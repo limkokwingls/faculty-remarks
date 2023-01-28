@@ -152,12 +152,14 @@ async def __read_transcripts(student_numbers: list[str], semester: int):
 
 
 def remove_failed_passed_courses(items: list[CourseGrades]) -> list[CourseGrades]:
-    passed_courses = [x.course for x in items if x.grade != 'F']
+    passed_courses = [x.course for x in items if x.grade !=
+                      'F' and x.grade != 'PP']
     deletable = []
 
     for it in items:
-        if it.course in passed_courses and it.grade == 'F':
-            deletable.append(it)
+        for passed_course in passed_courses:
+            if it.course == passed_course and (it.grade == 'F' or it.grade == 'PP'):
+                deletable.append(it)
 
     return [x for x in items if x not in deletable]
 
