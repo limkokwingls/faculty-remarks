@@ -4,14 +4,14 @@ from test_three import remove_failed_passed_courses
 from rich import print
 
 one = CourseGrades(Course("1", "Web Design in JavaScript"), "A", None, None)
-two = CourseGrades(Course("2", "PHP"), "F", None, None)
+two = CourseGrades(Course("2", "PHP"), "PP", None, None)
 three = CourseGrades(Course("3", "php"), "B", None, None)
-four = CourseGrades(Course("4", "C++"), "B", None, None)
-five = CourseGrades(
-    Course("x", "Web Design with java Script"), "D", None, None)
+# four = CourseGrades(Course("4", "C++"), "B", None, None)
+# five = CourseGrades(
+#     Course("x", "Web Design with java Script"), "D", None, None)
 
 grades = [
-    one, two, three, four, five
+    one, two, three,
 ]
 
 

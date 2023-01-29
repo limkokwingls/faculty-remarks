@@ -174,15 +174,15 @@ async def get_student_marks_with_remarks(html_table: ResultSet[Tag], semester: i
 
     data = []
     for std in students:
-        repeat = []
-        sup = []
+        repeat = set()
+        sup = set()
         for grades in std.grades:
             if not grades.marks:
                 continue
             if grades.marks >= 45 and grades.marks < 50:
-                sup.append(grades.course.code)
+                sup.add(grades.course.code)
             elif grades.marks < 45:
-                repeat.append(grades.course.code)
+                repeat.add(grades.course.code)
 
         remarks = "Proceed"
         if len(repeat) >= 3:

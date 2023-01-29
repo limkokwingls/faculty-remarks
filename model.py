@@ -55,8 +55,21 @@ class CourseGrades:
         self.points = float(self.points) if self.points else None
 
     @staticmethod
-    def marks_from_points(gpa_points):
-        return int((float(gpa_points)*70) / 3.33)
+    def marks_from_grade(grade):
+        switch = {
+            'A+': 90,
+            'A': 85,
+            'A-': 80,
+            'B+': 75,
+            'B': 70,
+            'B-': 65,
+            'C+': 60,
+            'C': 55,
+            'C-': 50,
+            'PX': 50,
+            'PP': 45,
+        }
+        return switch.get(grade, 0)
 
     def is_borderline(self):
         if not self.marks:
