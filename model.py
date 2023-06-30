@@ -40,7 +40,9 @@ class Course:
         if new_name.endswith("I"):
             new_name = new_name[:-1] + "1"
 
-        return new_name.upper()
+        
+
+        return new_name.upper().replace(" ", "")
 
 
 @dataclass
