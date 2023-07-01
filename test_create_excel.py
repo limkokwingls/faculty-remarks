@@ -33,16 +33,16 @@ programs = [
     "CBIT",
     "DBIT",
     "DIT",
-    # "DMSE",
-    # "INT",
-    # "BIT",
-    # "MSE",
-    # "BSCIT",
-    # "BSCBIT",
-    # "BSCSM",
-    # "BSIT",
-    # "BSBT",
-    # "BSSM",
+    "DMSE",
+    "INT",
+    "BIT",
+    "MSE",
+    "BSCBIT",
+    "BSCIT",
+    "BSCSM",
+    "BSIT",
+    "BSBT",
+    "BSSM",
 ]
 
 
@@ -64,7 +64,16 @@ async def download_results() -> dict[str, ResultSet[Tag]]:
                 res = await browser.session.post(urls.results_page(), payload)
                 soup = BeautifulSoup(res.text, PARSER)
                 table = soup.select(".ewReportTable tr")
-                data[class_name] = table
+                row_count = len(table)
+                if row_count > 7:
+                    data[class_name] = table
+                    console.print(
+                        f"{class_name} downloaded successfully", style="bold green"
+                    )
+                else:
+                    console.print(
+                        f"Ignoring {class_name} (has no data)", style="bold red"
+                    )
     return data
 
 
