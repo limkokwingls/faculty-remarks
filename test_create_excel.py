@@ -1,6 +1,7 @@
 import asyncio
 from typing import Dict
 
+import openpyxl
 import pyperclip
 from bs4 import BeautifulSoup, ResultSet, Tag
 from openpyxl.cell.cell import Cell
@@ -151,11 +152,12 @@ async def main():
     workbook = Workbook()
     results = await download_results()
 
-    for class_name, table in results.items():
-        sheet = workbook.create_sheet(class_name)
-        write_to_sheet(sheet, table)
+    with console.status(f"Writing downloaded data to spreadsheet..."):
+        for class_name, table in results.items():
+            sheet = workbook.create_sheet(class_name)
+            write_to_sheet(sheet, table)
 
-    workbook.save("data.xlsx")
+        workbook.save("data.xlsx")
 
 
 if __name__ == "__main__":
