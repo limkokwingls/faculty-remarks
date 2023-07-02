@@ -59,20 +59,31 @@ async def get_cms_marks(worksheet: Worksheet, progress="1/1)"):
     with console.status(f"{progress} Reading {label} transcripts..."):
         tasks = []
         for it in student_numbers:
-            tasks.append(asyncio.create_task(browser.read_transcript(it, 1)))
+            tasks.append(asyncio.create_task(browser.read_transcript(it, 2)))
         data = await asyncio.gather(*tasks)
 
         for i, it in enumerate(data):
             results[student_numbers[i]] = it
 
-    return convert_list_to_dict(results)
+    transformed_results = {}
+    # change results from CourseGrades to dict
+    for std_number, course_grades in results.items():
+        transformed_data = []
+        for it in course_grades:
+            transformed_data.append({it.course.code: it.marks})
+        transformed_results[std_number] = transformed_data
+
+    # print(transformed_results)
+    # exit()
+
+    return convert_list_to_dict(transformed_results)
 
 
 def open_file():
     file = None
     while file == None:
         try:
-            file_path = Prompt.ask("Excel File:", default="Results 2022-08_2.xlsx")
+            file_path = Prompt.ask("Excel File:", default="data.xlsx")
             file_path = file_path.strip('"')
             if Path(file_path).is_file():
                 file = file_path
