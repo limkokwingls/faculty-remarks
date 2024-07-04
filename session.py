@@ -1,7 +1,8 @@
 import httpx
 from bs4 import BeautifulSoup
-import urls
 from rich.console import Console
+
+import urls
 
 PARSER = "html5lib"
 console = Console()
@@ -10,10 +11,10 @@ console = Console()
 class Session:
     def __init__(self):
         transport = httpx.AsyncHTTPTransport(retries=5)
-        # limits = httpx.Limits(
-        #     max_keepalive_connections=None, max_connections=None)
+        limits = httpx.Limits(max_connections=5)
         self.client = httpx.AsyncClient(
-            follow_redirects=True, transport=transport, timeout=(90, 120))
+            follow_redirects=True, transport=transport, timeout=(90, 120), limits=limits
+        )
         self.logged_in = False
 
     async def post(self, url, data):
@@ -35,7 +36,7 @@ class Session:
                 "submit": "Login",
                 "username": username,
                 "password": password,
-                token.attrs['name']: token.attrs["value"]
+                token.attrs["name"]: token.attrs["value"],
             }
             res = await self.client.post(urls.login, data=payload)
             page = BeautifulSoup(res.text, PARSER)
