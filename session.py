@@ -1,6 +1,12 @@
 import httpx
 from bs4 import BeautifulSoup
 from rich.console import Console
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 
 import urls
 
@@ -27,24 +33,21 @@ class Session:
             raise RuntimeError("Not logged in")
         return await self.client.get(url)
 
-    async def login(self, username: str, password: str):
-        with console.status("Logging in..."):
-            form = await self.client.get(urls.login)
-            page = BeautifulSoup(form.text, PARSER)
-            token = page.select("form table tr:last-child input")[0]
-            payload = {
-                "submit": "Login",
-                "username": username,
-                "password": password,
-                token.attrs["name"]: token.attrs["value"],
-            }
-            res = await self.client.post(urls.login, data=payload)
-            page = BeautifulSoup(res.text, PARSER)
-            tags = page.select("p")
+    async def login(self):
+        driver = webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install())
+        )
 
-            if tags:
-                display_name = tags[0]
-                display_name = display_name.get_text(strip=True)
-                if "Students" in display_name:
-                    self.logged_in = True
-                    return True
+        driver.get(urls.login)
+        WebDriverWait(driver, 60 * 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.LINK_TEXT, "[ Logout ]")
+            )
+        )
+
+        cookies = driver.get_cookies()
+        driver.quit()
+
+        self.client.cookies.update({it["name"]: it["value"] for it in cookies})
+        self.logged_in = True
+        return self.logged_in

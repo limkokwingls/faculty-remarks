@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
+from rich import print
+from rich.console import Console
+
+import urls
 from html_utils import read_table
 from model import Course, CourseGrades
 from session import Session
-import urls
-from rich.console import Console
-from rich import print
 
 console = Console()
 
@@ -16,8 +17,8 @@ class Browser:
         self.session = Session()
         self.logged_in = False
 
-    async def login(self, username: str, password: str):
-        if await self.session.login(username, password):
+    async def login(self):
+        if await self.session.login():
             console.print("\nLogin Successful", style="green")
             self.logged_in = True
         return self.logged_in
@@ -48,23 +49,29 @@ class Browser:
         return list(dict.fromkeys(data))
 
     def __get_results(self, data: list):
-        data = [it for it in data if it
-                and ('Term:' not in it)
-                and ('Term' not in it)
-                and ('Semester:' not in it)
-                and ('Semester' not in it)
-                and ('Results:' not in it)
-                and ('Results' not in it)
-                and ('Code:' not in it)
-                and ('Code' not in it)
-                and ('Total:' not in it)
-                and ('Total' not in it)]
+        data = [
+            it
+            for it in data
+            if it
+            and ("Term:" not in it)
+            and ("Term" not in it)
+            and ("Semester:" not in it)
+            and ("Semester" not in it)
+            and ("Results:" not in it)
+            and ("Results" not in it)
+            and ("Code:" not in it)
+            and ("Code" not in it)
+            and ("Total:" not in it)
+            and ("Total" not in it)
+        ]
         results = []
         for it in data:
             try:
                 course_grade = CourseGrades(
-                    course=Course(code=it[0], name=it[1]), grade=it[2],
-                    marks=CourseGrades.marks_from_grade(it[2]), points=it[-2]
+                    course=Course(code=it[0], name=it[1]),
+                    grade=it[2],
+                    marks=CourseGrades.marks_from_grade(it[2]),
+                    points=it[-2],
                 )
                 results.append(course_grade)
             except Exception as ex:

@@ -1,4 +1,4 @@
-_url = "https://cmslesotho.limkokwing.net/campus/faculty"
+_url = "https://cmslesotho.limkokwing.net/campus/registry"
 login = f"{_url}/login.php"
 
 

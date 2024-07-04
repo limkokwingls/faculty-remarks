@@ -27,27 +27,15 @@ browser = Browser()
 
 
 def input_username_and_password():
-    username = Prompt.ask("Username")
-    password = Prompt.ask("Password", password=True)
-    display_name = browser.login(username, password)
+    display_name = browser.login()
     if not display_name:
         error_console.print("Invalid Credentials")
-    else:
-        write_credentials(username, password)
-        print()
     return display_name
 
 
 async def login():
     username, password, logged_in = None, None, False
-    credentials = read_credentials()
-    if credentials:
-        username, password = credentials
-        logged_in = await browser.login(username, password)
-    else:
-        print("Enter CMS credentials")
-        logged_in = input_username_and_password()
-
+    logged_in = await browser.login()
     while not logged_in:
         logged_in = input_username_and_password()
 
