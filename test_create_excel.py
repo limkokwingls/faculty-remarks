@@ -146,17 +146,9 @@ def write_to_sheet(sheet: Worksheet, html_table: ResultSet[Tag]):
     format_sheet(sheet)
 
 
-async def login():
-    username, password = None, None
-    credentials = read_credentials()
-    if credentials:
-        username, password = credentials
-        await browser.login(username, password)
-
-
 async def main():
     while not browser.logged_in:
-        await login()
+        await browser.login()
 
     workbook = Workbook()
     results = await download_results()
