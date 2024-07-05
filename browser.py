@@ -28,7 +28,8 @@ class Browser:
         page = BeautifulSoup(response.text, PARSER)
         table = page.select_one("table.ewReportTable")
         if not table:
-            raise Exception("Table not found")
+            print(f"Error student {student_number} has no transcript")
+            return []
         table_data = read_table(table)[2:-1]
 
         data = []

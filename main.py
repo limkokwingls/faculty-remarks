@@ -82,15 +82,18 @@ def open_file():
 
 async def add_remarks(workbook: Workbook, file):
     for i, ws in enumerate(workbook):
-        sheet: Worksheet = ws
-        cms_marks = await get_cms_marks(
-            sheet, progress=f"{i+1}/{len(workbook.sheetnames)})"
-        )
-        remarks = generate_remarks(sheet, cms_marks)
-        remarks_col = get_remark_col(sheet)
-        for it in remarks:
-            cell: Cell = sheet.cell(row=it, column=remarks_col)
-            cell.value = remarks[it]
+        try:
+            sheet: Worksheet = ws
+            cms_marks = await get_cms_marks(
+                sheet, progress=f"{i+1}/{len(workbook.sheetnames)})"
+            )
+            remarks = generate_remarks(sheet, cms_marks)
+            remarks_col = get_remark_col(sheet)
+            for it in remarks:
+                cell: Cell = sheet.cell(row=it, column=remarks_col)
+                cell.value = remarks[it]
+        except Exception as e:
+            error_console.print("Error:", e)
 
     workbook.save(file)
 

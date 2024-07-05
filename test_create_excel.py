@@ -54,7 +54,7 @@ async def download_results() -> dict[str, ResultSet[Tag]]:
             payload = {
                 "course": program,
                 "sem": semester,
-                "term": "2023-02",
+                "term": "2024-02",
                 "country": "LSO",
                 "grd": "1",
                 "Button1": "View",
